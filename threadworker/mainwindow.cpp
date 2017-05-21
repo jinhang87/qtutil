@@ -22,7 +22,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //线程结果上报信号绑定
     connect(worker, &Worker::resultReady, this, &MainWindow::handleResult);
     //界面按钮信号绑定
-    connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::sendopeatesignal);
+    connect(ui->pushButton, &QPushButton::clicked, this, [=](){
+        emit this->operate(QStringLiteral("send signal from mainwindow"));
+    });
     //启动线程
     thread->start();
     qDebug() << "MainWindow threadid : " << QThread::currentThreadId();
@@ -35,21 +37,16 @@ MainWindow::~MainWindow()
     //线程结束信号解绑定
     disconnect(thread, &QThread::finished, worker, &QObject::deleteLater);
     //线程控制信号解绑定
-    disconnect(this, &MainWindow::operate, worker, &Worker::dowork);
+    //disconnect(this, &MainWindow::operate, worker, &Worker::dowork);
     //线程结果上报信号解绑定
-    disconnect(worker, &Worker::resultReady, this, &MainWindow::handleResult);
+    //disconnect(worker, &Worker::resultReady, this, &MainWindow::handleResult);
     //界面按钮信号解绑定
-    disconnect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::sendopeatesignal);
+    //disconnect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::sendopeatesignal);
     thread->quit();
     thread->wait();
     delete thread;
     delete worker;
     delete ui;
-}
-
-void MainWindow::sendopeatesignal()
-{
-    emit operate(QStringLiteral("send signal from mainwindow"));
 }
 
 void MainWindow::handleResult(const QString& parameter)

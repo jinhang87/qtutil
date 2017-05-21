@@ -17,7 +17,6 @@ public:
     ~MainWindow();
 
 private:
-    void sendopeatesignal();
     Ui::MainWindow *ui;
     QThread* thread;
     Worker* worker;
