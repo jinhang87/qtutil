@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2017-05-15T21:09:57
+# Project created by QtCreator 2017-05-21T20:05:47
 #
 #-------------------------------------------------
 
@@ -8,15 +8,13 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = epl_QObject_moveToThread
+TARGET = iconlist
 TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    worker.cpp
+        mainwindow.cpp
 
-HEADERS  += mainwindow.h \
-    worker.h
+HEADERS  += mainwindow.h
 
 FORMS    += mainwindow.ui

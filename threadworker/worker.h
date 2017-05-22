@@ -8,7 +8,7 @@ class Worker : public QObject
     Q_OBJECT
 public:
     explicit Worker(QObject *parent = 0):QObject(parent) {}
-    ~Worker(){}
+    virtual ~Worker(){}
 
 signals:
     void resultReady(const QString &parameter);
