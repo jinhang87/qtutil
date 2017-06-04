@@ -31,8 +31,17 @@ void caseQString2Constcharptr()
 {
 //QString -> const char*
     QString s1("hello");
-    const char* pstr1 = qPrintable(s1);
-    qDebug() << "pstr1 = " << pstr1;
+    const char* pstr1_1 = qPrintable(s1);
+    qDebug() << "pstr1_1 = " << pstr1_1;
+
+#if 0  // warning !!!  this is errror, pstr1_3 print error string;
+    QString s1_2("hello");
+    const char* pstr1_3 = s1_2.toLocal8Bit().constData();
+    qDebug() << "pstr1_2 = " << pstr1_2;
+#endif
+
+    QString s1_2("hello");
+    qDebug() << "pstr1_2 = " << s1_2.toLocal8Bit().constData();
 
 //const char* -> QString
     const char* pstr2 = "abcd";
@@ -70,9 +79,9 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
     //caseQString2stdstring();
-    //caseQString2Constcharptr();
+    caseQString2Constcharptr();
     //caseQByteArrayContain0();
     //caseQByteArray2QString();
-    caseQStringFormat();
+    //caseQStringFormat();
     return a.exec();
 }
