@@ -1,9 +1,11 @@
 #include <QCoreApplication>
 #include <QDebug>
 #include <string.h>
+#include <QTextCodec>
 
 void caseQByteArrayContain0()
 {
+//QByteArray can contains "我0"
     QByteArray bytes;
     bytes.resize(5);
     bytes[0] = '1';
@@ -32,16 +34,22 @@ void caseQString2Constcharptr()
 //QString -> const char*
     QString s1("hello");
     const char* pstr1_1 = qPrintable(s1);
-    qDebug() << "pstr1_1 = " << pstr1_1;
+    qDebug() << "pstr1_1 = " << pstr1_1; // print "hello"
 
 #if 0  // warning !!!  this is errror, pstr1_3 print error string;
     QString s1_2("hello");
-    const char* pstr1_3 = s1_2.toLocal8Bit().constData();
-    qDebug() << "pstr1_2 = " << pstr1_2;
+    const char* pstr1_2 = s1_2.toLocal8Bit().constData();
+    qDebug() << "pstr1_2 = " << pstr1_2; // print not right!
 #endif
 
     QString s1_2("hello");
-    qDebug() << "pstr1_2 = " << s1_2.toLocal8Bit().constData();
+    qDebug() << "s1_2 = " << s1_2.toLocal8Bit().constData(); // print "hello"
+
+    //QString to ChineseChar
+    QTextCodec *tc = QTextCodec::codecForName("UTF8");
+    QString s1_3("hello我");
+    QByteArray b1_3 = tc->fromUnicode( s1_3 );
+    qDebug() << "s1_3 = " << b1_3.constData(); // print "hello我" in win7 cmd
 
 //const char* -> QString
     const char* pstr2 = "abcd";
