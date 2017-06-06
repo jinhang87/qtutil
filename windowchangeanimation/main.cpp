@@ -3,7 +3,7 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc,argv);
-#if 1
+#if 0
     QWidget *w=new QWidget;
     w->resize(240,320);
     QPushButton *button = new QPushButton("hicjiajia",w);
