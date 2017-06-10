@@ -9,33 +9,33 @@ Widget::Widget(QWidget *parent) :
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
-#if 0
-    QPropertyAnimation *pAnimation = new QPropertyAnimation(ui->pushButton, "geometry");
-    pAnimation->setDuration(1000);
-    pAnimation->setStartValue(QRect(0, 0, 75, 25));
-    pAnimation->setEndValue(QRect(200, 130, 75, 25));
-    pAnimation->setEasingCurve(QEasingCurve::OutBounce);  // 缓和曲线风格
-    pAnimation->start();
-#endif
 
-#if 1
-    QPropertyAnimation *pAnimation = new QPropertyAnimation();
+    pAnimation = new QPropertyAnimation();
     pAnimation->setTargetObject(this);
     pAnimation->setPropertyName("opacity");
     pAnimation->setDuration(500);
-    #if 0
-    pAnimation->setKeyValueAt(0, 0);
-    pAnimation->setKeyValueAt(0.5, 1);
-    pAnimation->setKeyValueAt(1, 0);
-    #else
     pAnimation->setKeyValueAt(0, 0);
     pAnimation->setKeyValueAt(1, 1);
-    pAnimation->setEasingCurve(QEasingCurve::OutBounce);  // 缓和曲线风格
-    #endif
-    //pAnimation->setLoopCount(-1); //永远运行，直到stop
-    connect(ui->pushButton_2, SIGNAL(clicked(bool)), pAnimation, SLOT(start()));
-#endif
+    //pAnimation->setEasingCurve(QEasingCurve::OutBounce);  // 缓和曲线风格
 
+    pAnimation2 = new QPropertyAnimation();
+    pAnimation2->setTargetObject(this);
+    pAnimation2->setPropertyName("opacity");
+    pAnimation2->setDuration(500);
+    pAnimation2->setKeyValueAt(0, 1);
+    pAnimation2->setKeyValueAt(1, 0);
+    //pAnimation2->setEasingCurve(QEasingCurve::OutBounce);  // 缓和曲线风格
+    connect(ui->pushButton_2, SIGNAL(clicked(bool)), this, SLOT(onBtnClicked()));
+}
+
+void Widget::onBtnClicked()
+{
+    static int count = 0;
+    if(count++%2 == 0){
+        pAnimation->start();
+    }else{
+        pAnimation2->start();
+    }
 }
 
 int Widget::alpha() const

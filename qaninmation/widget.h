@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+class QPropertyAnimation;
+
 namespace Ui {
 class Widget;
 }
@@ -21,10 +23,15 @@ public:
     qreal opacity() const;
     void setOpacity(const qreal opacity);
 
+private slots:
+    void onBtnClicked();
+
 private:
     Ui::Widget *ui;
     int m_nAlpha;
     qreal m_fOpacity;
+    QPropertyAnimation *pAnimation;
+    QPropertyAnimation *pAnimation2;
 };
 
 #endif // WIDGET_H
