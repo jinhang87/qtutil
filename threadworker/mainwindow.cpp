@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    worker = new Worker();
+    worker = new Worker;
     thread = new QThread;
     //线程和具体任务操作绑定
     worker->moveToThread(thread);
@@ -32,21 +32,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    //线程开始信号解绑定
-    disconnect(thread, &QThread::started, worker, &Worker::start);
-    //线程结束信号解绑定
-    disconnect(thread, &QThread::finished, worker, &QObject::deleteLater);
-    //线程控制信号解绑定
-    //disconnect(this, &MainWindow::operate, worker, &Worker::dowork);
-    //线程结果上报信号解绑定
-    //disconnect(worker, &Worker::resultReady, this, &MainWindow::handleResult);
-    //界面按钮信号解绑定
-    //disconnect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::sendopeatesignal);
     thread->quit();
     thread->wait();
-    delete thread;
-    delete worker;
+    delete thread; //emit QThread::finished
+    //delete worker;
     delete ui;
+    qDebug() << "~MainWindow()";
 }
 
 void MainWindow::handleResult(const QString& parameter)

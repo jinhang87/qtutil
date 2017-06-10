@@ -2,12 +2,14 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QPointer>
 
 namespace Ui {
 class MainWindow;
 }
 class QThread;
 class Worker;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -19,7 +21,7 @@ public:
 private:
     Ui::MainWindow *ui;
     QThread* thread;
-    Worker* worker;
+    QPointer<Worker> worker;
 
 public slots:
     void handleResult(const QString &parameter);
