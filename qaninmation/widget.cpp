@@ -22,11 +22,17 @@ Widget::Widget(QWidget *parent) :
     QPropertyAnimation *pAnimation = new QPropertyAnimation();
     pAnimation->setTargetObject(this);
     pAnimation->setPropertyName("opacity");
-    pAnimation->setDuration(1000);
+    pAnimation->setDuration(500);
+    #if 0
     pAnimation->setKeyValueAt(0, 0);
     pAnimation->setKeyValueAt(0.5, 1);
     pAnimation->setKeyValueAt(1, 0);
-    pAnimation->setLoopCount(-1); //永远运行，直到stop
+    #else
+    pAnimation->setKeyValueAt(0, 0);
+    pAnimation->setKeyValueAt(1, 1);
+    pAnimation->setEasingCurve(QEasingCurve::OutBounce);  // 缓和曲线风格
+    #endif
+    //pAnimation->setLoopCount(-1); //永远运行，直到stop
     connect(ui->pushButton_2, SIGNAL(clicked(bool)), pAnimation, SLOT(start()));
 #endif
 
