@@ -21,8 +21,11 @@ public:
 private:
     Ui::MainWindow *ui;
     QThread* thread;
+#ifdef USE_QPOINTER
     QPointer<Worker> worker;
-
+#else
+    Worker* worker;
+#endif
 public slots:
     void handleResult(const QString &parameter);
 

@@ -9,8 +9,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+#ifdef USE_QPOINTER
+    worker = new Worker(this);
+#else
     worker = new Worker;
+#endif
     thread = new QThread;
+
     //线程和具体任务操作绑定
     worker->moveToThread(thread);
     //线程开始信号绑定
@@ -35,7 +40,6 @@ MainWindow::~MainWindow()
     thread->quit();
     thread->wait();
     delete thread; //emit QThread::finished
-    //delete worker;
     delete ui;
     qDebug() << "~MainWindow()";
 }
