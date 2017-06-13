@@ -58,12 +58,12 @@ qDebug()<<(BACK_GROUND + "zong.png)");
     tmpWig = wig1;
 }
 
-#define ANIMATION_DUIJIAO
+#define ANIMATION_COVER
 
 void Stack::wigShow(QWidget *wig, int direct)
 {
 #ifdef ANIMATION_COVER //覆盖效果
-    qDebug() << "ANIMATION_COVER";
+    qDebug() << "ANIMATION_COVER dir = " << direct << "w = " << w;
     int startx = (direct > 0)? -w : w;
     QPropertyAnimation *animal1= new QPropertyAnimation(wig,"pos");
     animal1->setDuration(timeVal);
