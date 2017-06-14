@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
     ringBuffer.append(qba);
     memset(str,0,100);
     if(ringBuffer.canReadLine())
-    ringBuffer.readLine(str,100);
+        ringBuffer.readLine(str,100);
     qDebug()<<str;
     //测试拷贝数据+++++++++++++++++++++++++++++++++++++++++++
     qDebug()<<QStringLiteral("测试拷贝数据+++++++++++++++++++++++++++++++++++++++++++");
