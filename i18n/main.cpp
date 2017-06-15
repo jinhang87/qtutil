@@ -20,6 +20,8 @@ int main(int argc, char *argv[])
     }
 
     qDebug() << QObject::tr("plugins");
+    qDebug() << "ok";
+
     MainWindow w;
     w.show();
 
