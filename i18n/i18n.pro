@@ -34,3 +34,4 @@ FORMS += \
         mainwindow.ui
 
 TRANSLATIONS = $${TARGET}_zh_cn.ts
+

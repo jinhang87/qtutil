@@ -6,7 +6,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
+#if 0
     //创建翻译器
     QTranslator tsor;
 
@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     }else{
         qDebug() << "install not ok!";
     }
-
+#endif
     qDebug() << QObject::tr("plugins");
     qDebug() << "ok";
 
