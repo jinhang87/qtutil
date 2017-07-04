@@ -33,4 +33,8 @@ HEADERS += \
 FORMS += \
         mainwindow.ui
 
-LIBS += -lmydesignerpluginplugin
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/lib/ -lmydesignerpluginplugin
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/lib/ -lmydesignerpluginplugind
+else:unix: LIBS += -L$$PWD/lib/ -lmydesignerpluginplugin
+
+
