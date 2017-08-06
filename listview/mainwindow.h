@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QStringListModel>
 #include <QSharedPointer>
+#include <QItemDelegate>
 
 namespace Ui {
 class MainWindow;
@@ -29,8 +30,12 @@ private slots:
     void on_listView_clicked(const QModelIndex &index);
 
 private:
+    int getDisplayRowsCounts();
+
+private:
     Ui::MainWindow *ui;
     QSharedPointer<QStringListModel> model;
+    QSharedPointer<QItemDelegate> delegate;
 };
 
 #endif // MAINWINDOW_H

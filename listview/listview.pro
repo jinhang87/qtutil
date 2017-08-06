@@ -26,11 +26,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    listview.cpp
+    listview.cpp \
+    listitemdelegate.cpp
 
 HEADERS += \
         mainwindow.h \
-    listview.h
+    listview.h \
+    listitemdelegate.h
 
 FORMS += \
         mainwindow.ui
+
+RESOURCES += \
+    res.qrc
