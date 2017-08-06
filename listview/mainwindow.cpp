@@ -18,6 +18,8 @@ MainWindow::MainWindow(QWidget *parent) :
     model->setStringList(list);
     ui->listView->setModel(model.data());
     ui->listView->setSpacing(3);
+    ui->listView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->listView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 }
 
 MainWindow::~MainWindow()
