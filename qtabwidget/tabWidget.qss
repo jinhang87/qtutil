@@ -1,0 +1,78 @@
+﻿
+QTabWidget::pane {
+    border: 1px solid #444;
+    top: 1px;
+    min-width:127px;
+    min-height:60
+}
+
+QTabWidget::tab-bar
+{
+    border-width:0px;
+}
+
+QTabBar::tab {
+    color: #b1b1b1;
+    width:40px;
+    border: 1px solid #444;
+    border-bottom-style: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 3px;
+    padding-bottom: 2px;
+    margin-right: -1px;
+}
+
+QTabBar::tab:first:selected
+{
+    background-color: white;
+    border-image:url(:/image/firstselected.png);
+}
+
+QTabBar::tab:first:!selected
+{
+    background-color: white;
+    border-image:url(:/image/firstunselected.png);
+}
+
+QTabBar::tab:first:hover:!selected
+{
+    border-image:url(:/image/firstselected.png);
+}
+
+QTabBar::tab:middle:selected
+{
+    background-color: white;
+    border-image:url(:/image/firstselected.png);
+}
+
+QTabBar::tab:middle:!selected
+{
+    background-color: white;
+    border-image:url(:/image/firstunselected.png);
+}
+
+QTabBar::tab:middle:hover:!selected
+{
+    border-image:url(:/image/firstselected.png);
+}
+
+QTabBar::tab:last:selected
+{
+    border-image:url(:/image/firstselected.png);
+}
+
+QTabBar::tab:last:!selected
+{
+    border-image:url(:/image/firstunselected.png);
+}
+
+QTabBar::tab:last:hover:!selected
+{
+    border-image:url(:/image/firstselected.png);
+}
+
+QTabBar::tab:only-one
+{
+    margin: 0;
+}

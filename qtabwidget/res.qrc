@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/style">
+        <file>tabWidget.qss</file>
+        <file>tabWidgetStd.qss</file>
+    </qresource>
+</RCC>
