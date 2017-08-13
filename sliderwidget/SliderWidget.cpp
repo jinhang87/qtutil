@@ -1,13 +1,15 @@
 #include "SliderWidget.h"
 #include "BothWaySlider.h"
+#include <QDebug>
 
 SliderWidget::SliderWidget(QWidget *parent)
 	: QFrame(parent), _dLeftPos(0.0), _dRightPos(1.0)
 {
 	setObjectName("Slider");
-	setStyleSheet("#Slider{border:1px solid gray}");
+    setStyleSheet("#Slider{border:1px solid gray;margin:13px}");
 	_leftSlider = new SliderButton(this);
 	_rightSlider = new SliderButton(this, SliderButton::TYPE_RIGHT);
+    qDebug() << _leftSlider->geometry() << _leftSlider->width() << _leftSlider->height();
 }
 
 SliderWidget::~SliderWidget()
@@ -26,11 +28,13 @@ void SliderWidget::setLeftSliderGeomtry()
 {
 	_dLeftPos = _dLeftPos > _dRightPos ? _dRightPos : _dLeftPos;
 	_dLeftPos = _dLeftPos >= 0.0 ? _dLeftPos : 0.0;
-	_leftSlider->setGeometry((width() - 15) * _dLeftPos, 0, 15, height());
+    qDebug() << "w = " << width() << "h = " << height() << "left = " << _dLeftPos;
+    _leftSlider->setGeometry((width() - 15) * _dLeftPos, 30, 15, 15);
 	QString qStrTips = QString::number(_dLeftPos * 100, 'f', 2);
 	qStrTips += "%";
 	_leftSlider->setToolTip(qStrTips);
 	dynamic_cast<BothWaySlider*>(parentWidget())->changeValue(_dLeftPos, _dRightPos);
+    qDebug() << _leftSlider->geometry() << _leftSlider->width() << _leftSlider->height();
 }
 
 void SliderWidget::setRightSliderGeomtry()
