@@ -11,6 +11,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->pushButton->setToolTip("tips");
     setStyleSheet("QToolTip{background-image: url(:/image/image.png);}");
+    tips = new QPushButton("tip button", this);
+    tips->setWindowFlags(Qt::ToolTip);
+    tipstip = new QLabel("tipstip", this);
+    tipstip->hide();
+    connect(tips, &QPushButton::clicked, this, [=](){
+        tipstip->show();
+    });
 }
 
 MainWindow::~MainWindow()
@@ -33,4 +40,17 @@ bool MainWindow::event(QEvent *event)
 void MainWindow::on_radioButton_clicked()
 {
     //QToolTip::showText(ui->radioButton->)
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+
+    tips->move(geometry().x()+200,geometry().y());
+    tips->show();
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    tips->move(geometry().x()+100,geometry().y()+100);
+    tips->show();
 }

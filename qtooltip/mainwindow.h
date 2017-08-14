@@ -7,6 +7,7 @@ namespace Ui {
 class MainWindow;
 }
 class QLabel;
+class QPushButton;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -19,9 +20,14 @@ public:
 private slots:
     void on_radioButton_clicked();
 
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
 private:
     Ui::MainWindow *ui;
-    QLabel *tips;
+    QPushButton *tips;
+    QLabel *tipstip;
 };
 
 #endif // MAINWINDOW_H
