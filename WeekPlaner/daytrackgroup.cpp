@@ -12,7 +12,7 @@ void DayTrackGroup::addDayTrack(DayTrack *dayTrack, int id)
     if(dayTrack){
         mapDayTracks[id] = dayTrack;
         connect(dayTrack, &DayTrack::spliterClicked, this, [=](int, QRect rect){
-            qDebug() << "spliterClicked " << id << rect;
+            qDebug() << "spliterClicked " << id << rect << dayTrack->geometry();
             setDayTracksUnSelected(id);
             checkId = id;
             emit DayTrackClicked(id, rect);

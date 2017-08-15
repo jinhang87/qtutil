@@ -16,11 +16,13 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     daytrack.cpp \
     sliderbutton.cpp \
-    daytrackgroup.cpp
+    daytrackgroup.cpp \
+    timetip.cpp
 
 HEADERS  += mainwindow.h \
     daytrack.h \
     sliderbutton.h \
-    daytrackgroup.h
+    daytrackgroup.h \
+    timetip.h
 
 FORMS    += mainwindow.ui

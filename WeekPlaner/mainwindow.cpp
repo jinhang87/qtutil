@@ -1,6 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "daytrackgroup.h"
+#include "timetip.h"
+#include <QDebug>
+#include <QMouseEvent>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -11,9 +14,28 @@ MainWindow::MainWindow(QWidget *parent) :
     dayGroup->addDayTrack(ui->frame, 1);
     dayGroup->addDayTrack(ui->frame_2, 2);
     dayGroup->addDayTrack(ui->frame_3, 3);
+    tip = new TimeTip(this);
+    connect(dayGroup, &DayTrackGroup::DayTrackClicked, this, [=](int, QRect rect){
+        tip->setCentralRect(rect);
+    });
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::mousePressEvent(QMouseEvent *e)
+{
+    qDebug() << "mousePressEvent" << e->pos();
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    qDebug() << "MainWindow frame" << ui->frame->pos() << ui->frame->geometry();
+    qDebug() << "MainWindow frame_2" << ui->frame_2->pos() << ui->frame_2->geometry();
+    qDebug() << "MainWindow frame_3" << ui->frame_3->pos() << ui->frame_3->geometry();
+    qDebug() << "MainWindow centralWidget" << ui->centralWidget->pos() << ui->centralWidget->geometry();
+    qDebug() << "MainWindow verticalLayout" << ui->verticalLayout->geometry() ;
+    qDebug() << "MainWindow pushButton" << ui->pushButton->pos() << ui->pushButton->geometry();
 }
