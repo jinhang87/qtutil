@@ -17,16 +17,13 @@ void DayTrackGroup::addDayTrack(DayTrack *dayTrack, int id)
             checkId = id;
             emit DayTrackClicked(id, rect);
         });
-
         connect(dayTrack, &DayTrack::spliterOutsideClicked, this, [=](){
             qDebug() << "spliterOutsideClicked ";
             setDayTracksUnSelected();
             checkId = -1;
             emit DayTrackOutSideClicked();
         });
-
     }
-    //qDebug() << mapDayTracks;
 }
 
 int DayTrackGroup::checkedId() const

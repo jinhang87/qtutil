@@ -1,7 +1,7 @@
 #include "timetip.h"
 #include "sliderbutton.h"
 
-TimeTip::TimeTip(QWidget *parent) : QWidget(parent)
+TimeTip::TimeTip(QWidget *parent) : QObject(parent)
 {
     left = new SliderButton(parent);
     left->move(100,100);
@@ -27,4 +27,18 @@ void TimeTip::setCentralRect(const QRect &rect)
     p = QPoint(rect.topLeft().x() + (rect.width()/2) - (detail->width()/2), rect.topLeft().y() - detail->height() - 15);
     detail->move(p);
 
+}
+
+void TimeTip::show()
+{
+    left->show();
+    right->show();
+    detail->show();
+}
+
+void TimeTip::hide()
+{
+    left->hide();
+    right->hide();
+    detail->hide();
 }

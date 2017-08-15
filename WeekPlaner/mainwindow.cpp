@@ -15,8 +15,16 @@ MainWindow::MainWindow(QWidget *parent) :
     dayGroup->addDayTrack(ui->frame_2, 2);
     dayGroup->addDayTrack(ui->frame_3, 3);
     tip = new TimeTip(this);
-    connect(dayGroup, &DayTrackGroup::DayTrackClicked, this, [=](int, QRect rect){
-        tip->setCentralRect(rect);
+    connect(dayGroup, &DayTrackGroup::DayTrackClicked, this, [=](int id, QRect rect){
+        DayTrack *dayTrack = dayGroup->dayTrack(id);
+        QPoint p = dayTrack->mapTo(this, rect.topLeft());
+        tip->setCentralRect(QRect(p, rect.size()));
+        tip->show();
+    });
+
+
+    connect(dayGroup, &DayTrackGroup::DayTrackOutSideClicked, this, [=](){
+        tip->hide();
     });
 }
 
@@ -32,7 +40,8 @@ void MainWindow::mousePressEvent(QMouseEvent *e)
 
 void MainWindow::on_pushButton_clicked()
 {
-    qDebug() << "MainWindow frame" << ui->frame->pos() << ui->frame->geometry();
+    QPoint p = ui->frame->mapTo(this, ui->frame->pos());
+    qDebug() << "MainWindow frame" << ui->frame->pos() << ui->frame->geometry() << p;
     qDebug() << "MainWindow frame_2" << ui->frame_2->pos() << ui->frame_2->geometry();
     qDebug() << "MainWindow frame_3" << ui->frame_3->pos() << ui->frame_3->geometry();
     qDebug() << "MainWindow centralWidget" << ui->centralWidget->pos() << ui->centralWidget->geometry();

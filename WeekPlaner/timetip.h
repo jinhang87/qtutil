@@ -6,12 +6,14 @@
 #include <QPushButton>
 
 class SliderButton;
-class TimeTip : public QWidget
+class TimeTip : public QObject
 {
     Q_OBJECT
 public:
     explicit TimeTip(QWidget *parent = 0);
     void setCentralRect(const QRect& rect);
+    void show();
+    void hide();
 
 signals:
 

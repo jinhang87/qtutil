@@ -13,7 +13,6 @@ DayTrack::DayTrack(QWidget *parent) : QFrame(parent), selected(-1)
     spliter.start = (qreal)1/24;
     spliter.end = (qreal)3/24;
     spliters << spliter;
-    qDebug() << spliter.start << spliter.end ;
 
     spliter.start = (qreal)5/24;
     spliter.end = (qreal)8/24;
@@ -40,8 +39,6 @@ void DayTrack::paintEvent(QPaintEvent *e)
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(QPen(QColor(0, 160, 230), 2));
 
-    qDebug() << painter.viewport();
-
     QColor norm = QColor(255, 160, 90);
     QColor hover = QColor(255, 77, 90);
     QRect selectedRect = QRect(0,0,0,0);
@@ -60,14 +57,11 @@ void DayTrack::paintEvent(QPaintEvent *e)
 
 void DayTrack::mousePressEvent(QMouseEvent *e)
 {
-    qDebug() << e->globalPos() << e->pos();
     QListIterator<SegmentSpliter> it(spliters);
     int cout = 0;
     while (it.hasNext()) {
         QRect rect = spliterToRect(it.next());
-        qDebug() << e->pos() << rect;
         if(rect.contains(e->pos())){
-            qDebug() << cout << "contains";
             selected = cout;
             update();
             emit spliterClicked(cout, rect);
@@ -78,7 +72,6 @@ void DayTrack::mousePressEvent(QMouseEvent *e)
     }
 
     if(cout == spliters.size()){
-        qDebug() << cout << "not contains";
         selected = -1;
         update();
         emit spliterOutsideClicked();
