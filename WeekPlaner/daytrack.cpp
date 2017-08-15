@@ -40,6 +40,8 @@ void DayTrack::paintEvent(QPaintEvent *e)
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(QPen(QColor(0, 160, 230), 2));
 
+    qDebug() << painter.viewport();
+
     QColor norm = QColor(255, 160, 90);
     QColor hover = QColor(255, 77, 90);
     QRect selectedRect = QRect(0,0,0,0);
@@ -71,13 +73,13 @@ void DayTrack::mousePressEvent(QMouseEvent *e)
             emit spliterClicked(cout, rect);
             break;
         }else{
-            qDebug() << cout << "not contains";
-            selected = -1;
         }
         cout++;
     }
 
     if(cout == spliters.size()){
+        qDebug() << cout << "not contains";
+        selected = -1;
         update();
         emit spliterOutsideClicked();
     }

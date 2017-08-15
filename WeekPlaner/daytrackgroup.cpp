@@ -11,16 +11,18 @@ void DayTrackGroup::addDayTrack(DayTrack *dayTrack, int id)
 {
     if(dayTrack){
         mapDayTracks[id] = dayTrack;
-        connect(dayTrack, &DayTrack::spliterClicked, this, [=](int, QRect){
-            qDebug() << "spliterClicked id = " << id;
+        connect(dayTrack, &DayTrack::spliterClicked, this, [=](int, QRect rect){
+            qDebug() << "spliterClicked " << id << rect;
             setDayTracksUnSelected(id);
             checkId = id;
+            emit DayTrackClicked(id, rect);
         });
 
         connect(dayTrack, &DayTrack::spliterOutsideClicked, this, [=](){
             qDebug() << "spliterOutsideClicked ";
             setDayTracksUnSelected();
             checkId = -1;
+            emit DayTrackOutSideClicked();
         });
 
     }
@@ -30,6 +32,11 @@ void DayTrackGroup::addDayTrack(DayTrack *dayTrack, int id)
 int DayTrackGroup::checkedId() const
 {
     return checkId;
+}
+
+DayTrack *DayTrackGroup::dayTrack(int id) const
+{
+    return mapDayTracks[id];
 }
 
 int DayTrackGroup::id(DayTrack *dayTrack) const
