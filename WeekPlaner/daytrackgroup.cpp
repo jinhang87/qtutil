@@ -16,6 +16,13 @@ void DayTrackGroup::addDayTrack(DayTrack *dayTrack, int id)
             setDayTracksUnSelected(id);
             checkId = id;
         });
+
+        connect(dayTrack, &DayTrack::spliterOutsideClicked, this, [=](){
+            qDebug() << "spliterOutsideClicked ";
+            setDayTracksUnSelected();
+            checkId = -1;
+        });
+
     }
     //qDebug() << mapDayTracks;
 }
@@ -43,13 +50,13 @@ int DayTrackGroup::id(DayTrack *dayTrack) const
     return id;
 }
 
-void DayTrackGroup::setDayTracksUnSelected(int ExceptionalId)
+void DayTrackGroup::setDayTracksUnSelected(int exceptionalId)
 {
     QMapIterator<int, DayTrack *> it(mapDayTracks);
     while (it.hasNext()) {
         it.next();
         DayTrack *dayTrack = it.value();
-        if(it.key() != ExceptionalId){
+        if(it.key() != exceptionalId){
             dayTrack->setSelected(-1);
         }
     }

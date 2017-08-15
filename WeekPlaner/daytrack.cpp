@@ -70,10 +70,17 @@ void DayTrack::mousePressEvent(QMouseEvent *e)
             update();
             emit spliterClicked(cout, rect);
             break;
+        }else{
+            qDebug() << cout << "not contains";
+            selected = -1;
         }
         cout++;
     }
 
+    if(cout == spliters.size()){
+        update();
+        emit spliterOutsideClicked();
+    }
 }
 
 QRect DayTrack::spliterToRect(const SegmentSpliter &spliter)

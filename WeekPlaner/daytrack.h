@@ -30,6 +30,7 @@ protected:
 
 signals:
     void spliterClicked(int index, QRect rect);
+    void spliterOutsideClicked();
 
 public slots:
 

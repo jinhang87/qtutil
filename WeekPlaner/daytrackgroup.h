@@ -14,14 +14,12 @@ public:
     int checkedId() const;
     int id(DayTrack *dayTrack) const;
 
-
 signals:
 
 public slots:
-    //void onDayTrackSpliterClicked(int index, QRect rect);
 
 private:
-    void setDayTracksUnSelected(int ExceptionalId);
+    void setDayTracksUnSelected(int exceptionalId = -1);
     QMap<int, DayTrack *> mapDayTracks;
     int checkId;
 };
