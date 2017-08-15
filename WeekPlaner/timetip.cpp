@@ -1,17 +1,15 @@
 #include "timetip.h"
 #include "sliderbutton.h"
+#include "daytrack.h"
+#include <QDebug>
 
 TimeTip::TimeTip(QWidget *parent) : QObject(parent)
 {
     left = new SliderButton(parent);
-    left->move(100,100);
     right = new SliderButton(parent);
-    right->move(200,100);
     detail = new QPushButton(parent);
-    detail->resize(100,50);
-    detail->move(300,100);
-
-    setCentralRect(QRect(300,100,50,10));
+    detail->resize(100,20);
+    //setCentralRect(QRect(300,100,50,10));
 }
 
 void TimeTip::setCentralRect(const QRect &rect)
@@ -41,4 +39,23 @@ void TimeTip::hide()
     left->hide();
     right->hide();
     detail->hide();
+}
+
+DayTrack *TimeTip::getDaytrack() const
+{
+    return daytrack;
+}
+
+void TimeTip::setDaytrack(DayTrack *value)
+{
+    if(value){
+        daytrack = value;
+        QList<SegmentSpliter> list = daytrack->getSpliters();
+        SegmentSpliter spliter = list[daytrack->getSelected()];
+        connect(left, &SliderButton::posChanged, this, [=](int value){
+            qDebug() << value << spliter.start << spliter.end << daytrack->size();
+            spliter.start -= (qreal)value/daytrack->width();
+            qDebug() << spliter.start;
+        });
+    }
 }

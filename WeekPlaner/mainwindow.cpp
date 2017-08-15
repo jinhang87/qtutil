@@ -15,10 +15,13 @@ MainWindow::MainWindow(QWidget *parent) :
     dayGroup->addDayTrack(ui->frame_2, 2);
     dayGroup->addDayTrack(ui->frame_3, 3);
     tip = new TimeTip(this);
+    tip->hide();
+
     connect(dayGroup, &DayTrackGroup::DayTrackClicked, this, [=](int id, QRect rect){
         DayTrack *dayTrack = dayGroup->dayTrack(id);
         QPoint p = dayTrack->mapTo(this, rect.topLeft());
         tip->setCentralRect(QRect(p, rect.size()));
+        tip->setDaytrack(dayTrack);
         tip->show();
     });
 
