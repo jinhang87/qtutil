@@ -11,19 +11,20 @@ SliderButton::SliderButton(QWidget *parent) : QPushButton(parent)
 void SliderButton::mousePressEvent(QMouseEvent * event)
 {
     pressedPos = event->pos().x();
-    qDebug() << "mousePressEvent" << pressedPos;
+    qDebug() << "SliderButton::mousePressEvent" << pressedPos;
 }
 
 void SliderButton::mouseMoveEvent(QMouseEvent * event)
 {
     int changePos = event->pos().x() - pressedPos;
+    qDebug() << "SliderButton::mouseMoveEvent" << changePos << pressedPos << event->pos() << pos();
     emit posChanged(changePos);
     //dynamic_cast<SliderWidget*>(parentWidget())->sliderMove(iChange, _sliderType);
-    qDebug() << "mouseMoveEvent" << pressedPos;
 }
 
 void SliderButton::paintEvent(QPaintEvent *e)
 {
+    //qDebug() << "SliderButton::paintEvent";
     QPainter painter(this); //创建painter
     painter.setRenderHint(QPainter::Antialiasing, true); //消除锯齿效果
 

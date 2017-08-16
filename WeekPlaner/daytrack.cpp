@@ -34,6 +34,7 @@ QSize DayTrack::sizeHint() const
 
 void DayTrack::paintEvent(QPaintEvent *e)
 {
+    //qDebug() << "DayTrack::paintEvent";
     Q_UNUSED(e);
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
@@ -57,6 +58,7 @@ void DayTrack::paintEvent(QPaintEvent *e)
 
 void DayTrack::mousePressEvent(QMouseEvent *e)
 {
+    qDebug() << "DayTrack::mousePressEvent";
     QListIterator<SegmentSpliter> it(spliters);
     int cout = 0;
     while (it.hasNext()) {
@@ -94,13 +96,26 @@ int DayTrack::getSelected() const
 
 void DayTrack::setSelected(int value)
 {
+    int last = selected;
     if(value >= 0 && value < spliters.size()){
         selected = value;
     }
     else{
         selected = -1;
     }
-    update();
+
+    if(last != selected){
+        update();
+    }
+}
+
+QRect DayTrack::getSelectedRect()
+{
+    QRect rect = QRect(0,0,0,0);
+    if(selected >= 0 && selected < spliters.size()){
+        rect = spliterToRect(spliters.at(selected));
+    }
+    return rect;
 }
 
 QList<SegmentSpliter> DayTrack::getSpliters() const
@@ -112,5 +127,32 @@ void DayTrack::setSpliters(const QList<SegmentSpliter> &value)
 {
     spliters = value;
     update();
+}
+
+SegmentSpliter DayTrack::getSelectedSpliter(bool &ok) const
+{
+    if(selected >= 0 && selected < spliters.size()){
+        ok = true;
+        return spliters[selected];
+    }else{
+        SegmentSpliter null;
+        null.start = null.end = 0;
+        ok = false;
+        return null;
+    }
+}
+
+bool DayTrack::setSelectedSpliter(const SegmentSpliter &value)
+{
+    if(selected >= 0 && selected < spliters.size()){
+        if(value != spliters[selected]){
+            spliters[selected] = value;
+            update();
+            //QRect rect = spliterToRect(value);
+            //emit spliterClicked(selected, rect);
+            return true;
+        }
+    }
+    return false;
 }
 

@@ -8,6 +8,21 @@ struct SegmentSpliter
 {
     qreal start;
     qreal end;
+
+    bool operator==(const SegmentSpliter &other) const{
+        if(start == other.start && end == other.end){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    bool operator!=(const SegmentSpliter &other) const{
+        if(start != other.start || end != other.end){
+            return true;
+        }else{
+            return false;
+        }
+    }
 };
 
 class DayTrack : public QFrame
@@ -19,9 +34,12 @@ public:
 
     QList<SegmentSpliter> getSpliters() const;
     void setSpliters(const QList<SegmentSpliter> &value);
-
+    bool setSelectedSpliter(const SegmentSpliter& value);
+    SegmentSpliter getSelectedSpliter(bool &ok) const;
     int getSelected() const;
     void setSelected(int value);
+    QRect getSelectedRect();
+    QRect spliterToRect(const SegmentSpliter &spliter);
 
 protected:
     virtual QSize sizeHint() const;
@@ -35,7 +53,6 @@ signals:
 public slots:
 
 private:
-    QRect spliterToRect(const SegmentSpliter &spliter);
     QList<SegmentSpliter> spliters;
     int selected;
 };

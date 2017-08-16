@@ -7,7 +7,7 @@
 
 class SliderButton;
 class DayTrack;
-class TimeTip : public QObject
+class TimeTip : public QWidget
 {
     Q_OBJECT
 public:
