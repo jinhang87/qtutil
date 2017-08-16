@@ -153,16 +153,13 @@ bool DayTrack::intersectsExceptSelected(const SegmentSpliter &value) const
     int cout = 0;
     while (it.hasNext()) {
         SegmentSpliter spliter = it.next();
-        qDebug()<< cout << selected;
         if(cout == selected){
             cout++;
             continue;
         }
         if(value.intersects(spliter)){
-            qDebug()<<"intersects" << value.start << value.end << spliter.start << spliter.end;
             return true;
         }
-        qDebug()<< "un" << value.start << value.end << spliter.start << spliter.end;
         cout++;
     }
     return false;
