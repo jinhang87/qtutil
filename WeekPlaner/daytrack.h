@@ -23,6 +23,14 @@ struct SegmentSpliter
             return false;
         }
     }
+
+    bool intersects(const SegmentSpliter &other) const {
+        if( (end >= other.start) && (start < other.end)){
+            return true;
+        }else{
+            return false;
+        }
+    }
 };
 
 class DayTrack : public QFrame
@@ -36,10 +44,14 @@ public:
     void setSpliters(const QList<SegmentSpliter> &value);
     bool setSelectedSpliter(const SegmentSpliter& value);
     SegmentSpliter getSelectedSpliter(bool &ok) const;
+    bool intersectsExceptSelected(const SegmentSpliter &value) const;
+
     int getSelected() const;
     void setSelected(int value);
     QRect getSelectedRect();
+
     QRect spliterToRect(const SegmentSpliter &spliter);
+    SegmentSpliter rectToSpliter(const QRect &rect);
 
 protected:
     virtual QSize sizeHint() const;

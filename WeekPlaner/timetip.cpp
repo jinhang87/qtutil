@@ -6,6 +6,7 @@
 TimeTip::TimeTip(QWidget *parent) : QWidget(parent)
 {
     left = new SliderButton(parent);
+    connect(left, &SliderButton::posChanged, this, &TimeTip::onLeftPosChanged);
     right = new SliderButton(parent);
     detail = new QPushButton(parent);
     detail->resize(200,20);
@@ -26,7 +27,11 @@ void TimeTip::setCentralRect(const QRect &rect)
     p = QPoint(rect.topLeft().x() + (rect.width()/2) - (detail->width()/2), rect.topLeft().y() - detail->height() - 15);
     if(p != detail->pos())
         detail->move(p);
-    qDebug() << "TimeTip::setCentralRect";
+}
+
+void TimeTip::setText(const QString &text)
+{
+    detail->setText(text);
 }
 
 void TimeTip::show()
@@ -52,24 +57,28 @@ void TimeTip::setDaytrack(DayTrack *value)
 {
     if(value != daytrack){
         daytrack = value;
-        connect(left, &SliderButton::posChanged, this, [=](int value){
-            qDebug() << "TimeTip::setDaytrack" << value << daytrack->width();
-            bool ok = false;
-            SegmentSpliter spliterSelected = daytrack->getSelectedSpliter(ok);
-            SegmentSpliter spliterNew;
-            spliterNew.start = spliterSelected.start + (qreal)value/daytrack->width();
-            spliterNew.end  = spliterSelected.end;
-
-            if(daytrack->setSelectedSpliter(spliterNew)){
-                QString text;
-                text = QString("%1~%2").arg(spliterNew.start).arg(spliterNew.end);
-                detail->setText(text);
-            }
-
-            QRect rect = daytrack->getSelectedRect();
-            QPoint p = daytrack->mapTo((const QWidget*)parent(), rect.topLeft());
-            setCentralRect(QRect(p, rect.size()));
-
-        });
     }
+}
+
+void TimeTip::onLeftPosChanged(int value)
+{
+    if(!daytrack){
+        return;
+    }
+    bool ok = false;
+    SegmentSpliter spliterSelected = daytrack->getSelectedSpliter(ok);
+    SegmentSpliter spliterNew;
+    spliterNew.start = spliterSelected.start + (qreal)value/daytrack->width();
+    spliterNew.end  = spliterSelected.end;
+
+    if(daytrack->setSelectedSpliter(spliterNew)){
+        QString text;
+        text = QString("%1~%2").arg(spliterNew.start).arg(spliterNew.end);
+        detail->setText(text);
+    }
+#if 0
+    QRect rect = daytrack->getSelectedRect();
+    QPoint p = daytrack->mapTo((const QWidget*)parent(), rect.topLeft());
+    setCentralRect(QRect(p, rect.size()));
+#endif
 }

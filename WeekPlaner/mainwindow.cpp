@@ -14,6 +14,9 @@ MainWindow::MainWindow(QWidget *parent) :
     dayGroup->addDayTrack(ui->frame, 1);
     dayGroup->addDayTrack(ui->frame_2, 2);
     dayGroup->addDayTrack(ui->frame_3, 3);
+    dayGroup->addDayTrack(ui->frame_4, 4);
+    dayGroup->addDayTrack(ui->frame_5, 5);
+    dayGroup->addDayTrack(ui->frame_6, 6);
     tip = new TimeTip(this);
     tip->hide();
 
@@ -22,6 +25,9 @@ MainWindow::MainWindow(QWidget *parent) :
         QPoint p = dayTrack->mapTo(this, rect.topLeft());
         tip->setCentralRect(QRect(p, rect.size()));
         tip->setDaytrack(dayTrack);
+        SegmentSpliter spliter = dayTrack->rectToSpliter(rect);
+        QString text = QString("%1~%2").arg(spliter.start).arg(spliter.end);
+        tip->setText(text);
         tip->show();
     });
 

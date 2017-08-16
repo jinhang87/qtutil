@@ -34,7 +34,6 @@ QSize DayTrack::sizeHint() const
 
 void DayTrack::paintEvent(QPaintEvent *e)
 {
-    //qDebug() << "DayTrack::paintEvent";
     Q_UNUSED(e);
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
@@ -52,13 +51,11 @@ void DayTrack::paintEvent(QPaintEvent *e)
         QColor color = (selectedRect==rect) ? hover : norm;
         painter.setBrush(color);
         painter.drawRect(rect);
-
     }
 }
 
 void DayTrack::mousePressEvent(QMouseEvent *e)
 {
-    qDebug() << "DayTrack::mousePressEvent";
     QListIterator<SegmentSpliter> it(spliters);
     int cout = 0;
     while (it.hasNext()) {
@@ -87,6 +84,14 @@ QRect DayTrack::spliterToRect(const SegmentSpliter &spliter)
     int y = 0;
     int h = height();
     return QRect(x, y, w, h);
+}
+
+SegmentSpliter DayTrack::rectToSpliter(const QRect &rect)
+{
+    SegmentSpliter spliter;
+    spliter.start = (qreal)rect.x()/width();
+    spliter.end = (qreal)rect.width()/width()+spliter.start;
+    return spliter;
 }
 
 int DayTrack::getSelected() const
@@ -142,14 +147,37 @@ SegmentSpliter DayTrack::getSelectedSpliter(bool &ok) const
     }
 }
 
+bool DayTrack::intersectsExceptSelected(const SegmentSpliter &value) const
+{
+    QListIterator<SegmentSpliter> it(spliters);
+    int cout = 0;
+    while (it.hasNext()) {
+        SegmentSpliter spliter = it.next();
+        if(cout == selected){
+            continue;
+        }
+        if(value.intersects(spliter)){
+            return true;
+        }
+        cout++;
+    }
+    return false;
+}
+
 bool DayTrack::setSelectedSpliter(const SegmentSpliter &value)
 {
     if(selected >= 0 && selected < spliters.size()){
+        if(intersectsExceptSelected(value)){
+            return false;
+        }
+        if(value.start >= value.end){
+            return false;
+        }
         if(value != spliters[selected]){
             spliters[selected] = value;
             update();
-            //QRect rect = spliterToRect(value);
-            //emit spliterClicked(selected, rect);
+            QRect rect = spliterToRect(value);
+            emit spliterClicked(selected, rect);
             return true;
         }
     }

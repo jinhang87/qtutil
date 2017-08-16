@@ -13,6 +13,7 @@ class TimeTip : public QWidget
 public:
     explicit TimeTip(QWidget *parent = 0);
     void setCentralRect(const QRect& rect);
+    void setText(const QString &text);
     void show();
     void hide();
 
@@ -22,6 +23,7 @@ public:
 signals:
 
 public slots:
+    void onLeftPosChanged(int value);
 
 private:
     SliderButton* left;
