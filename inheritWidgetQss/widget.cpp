@@ -6,7 +6,7 @@ Widget::Widget(QWidget *parent) :
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
-    setStyleSheet(tr("background-color: blue"));
+    ui->pushButton->setStyleSheet("background-color: green");
 }
 
 Widget::~Widget()
