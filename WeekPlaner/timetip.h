@@ -22,8 +22,9 @@ public:
 
 signals:
 
-public slots:
+private slots:
     void onLeftPosChanged(int value);
+    void onRightPosChanged(int value);
 
 private:
     SliderButton* left;

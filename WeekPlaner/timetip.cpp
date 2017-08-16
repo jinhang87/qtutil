@@ -8,6 +8,7 @@ TimeTip::TimeTip(QWidget *parent) : QWidget(parent)
     left = new SliderButton(parent);
     connect(left, &SliderButton::posChanged, this, &TimeTip::onLeftPosChanged);
     right = new SliderButton(parent);
+    connect(right, &SliderButton::posChanged, this, &TimeTip::onRightPosChanged);
     detail = new QPushButton(parent);
     detail->resize(200,20);
 }
@@ -76,9 +77,23 @@ void TimeTip::onLeftPosChanged(int value)
         text = QString("%1~%2").arg(spliterNew.start).arg(spliterNew.end);
         detail->setText(text);
     }
-#if 0
-    QRect rect = daytrack->getSelectedRect();
-    QPoint p = daytrack->mapTo((const QWidget*)parent(), rect.topLeft());
-    setCentralRect(QRect(p, rect.size()));
-#endif
+}
+
+void TimeTip::onRightPosChanged(int value)
+{
+    if(!daytrack){
+        return;
+    }
+
+    bool ok = false;
+    SegmentSpliter spliterSelected = daytrack->getSelectedSpliter(ok);
+    SegmentSpliter spliterNew;
+    spliterNew.start = spliterSelected.start ;
+    spliterNew.end  = spliterSelected.end + (qreal)value/daytrack->width();
+
+    if(daytrack->setSelectedSpliter(spliterNew)){
+        QString text;
+        text = QString("%1~%2").arg(spliterNew.start).arg(spliterNew.end);
+        detail->setText(text);
+    }
 }

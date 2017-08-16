@@ -25,7 +25,7 @@ struct SegmentSpliter
     }
 
     bool intersects(const SegmentSpliter &other) const {
-        if( (end >= other.start) && (start < other.end)){
+        if( (end > other.start) && (start < other.end) ){
             return true;
         }else{
             return false;
