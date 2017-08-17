@@ -57,6 +57,7 @@ protected:
     virtual QSize sizeHint() const;
     virtual void paintEvent(QPaintEvent *e);
     virtual void mousePressEvent(QMouseEvent *e);
+    virtual void resizeEvent(QResizeEvent *e);
 
 signals:
     void spliterClicked(int index, QRect rect);

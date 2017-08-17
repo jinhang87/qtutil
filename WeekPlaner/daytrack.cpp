@@ -17,6 +17,7 @@ DayTrack::DayTrack(QWidget *parent) : QFrame(parent), selected(-1)
     spliter.start = (qreal)5/24;
     spliter.end = (qreal)8/24;
     spliters << spliter;
+
     spliter.start = (qreal)11/24;
     spliter.end = (qreal)24/24;
     spliters << spliter;
@@ -74,6 +75,22 @@ void DayTrack::mousePressEvent(QMouseEvent *e)
         selected = -1;
         update();
         emit spliterOutsideClicked();
+    }
+}
+
+void DayTrack::resizeEvent(QResizeEvent *e)
+{
+    Q_UNUSED(e);
+    QListIterator<SegmentSpliter> it(spliters);
+    int cout = 0;
+    while (it.hasNext()) {
+        SegmentSpliter spliter = it.next();
+        if(cout==selected){
+            QRect rect = spliterToRect(spliter);
+            emit spliterClicked(cout, rect);
+            break;
+        }
+        cout++;
     }
 }
 

@@ -23,6 +23,8 @@ void SliderButton::paintEvent(QPaintEvent *e)
 {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setWindow(0,0,12,12);
+    painter.setViewport(0,0,width(), height());
 
     QPainterPath path;
     path.moveTo(0, 6);
@@ -38,4 +40,9 @@ void SliderButton::paintEvent(QPaintEvent *e)
     //绘制背景
     painter.drawPath(path);
     e->accept();//不再向父类传递消息
+}
+
+QSize SliderButton::sizeHint() const
+{
+    return QSize(12,12);
 }
