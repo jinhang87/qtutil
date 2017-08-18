@@ -42,6 +42,8 @@ public:
 
     QList<SegmentSpliter> getSpliters() const;
     void setSpliters(const QList<SegmentSpliter> &value);
+    void clearSpliters();
+    void fullSpliters();
     bool setSelectedSpliter(const SegmentSpliter& value);
     SegmentSpliter getSelectedSpliter(bool &ok) const;
     bool intersectsExceptSelected(const SegmentSpliter &value) const;

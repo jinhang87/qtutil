@@ -17,12 +17,18 @@ SOURCES += main.cpp\
     daytrack.cpp \
     sliderbutton.cpp \
     daytrackgroup.cpp \
-    timetip.cpp
+    timetip.cpp \
+    weekplaneditablepanel.cpp \
+    weekplancopyablepanel.cpp
 
 HEADERS  += mainwindow.h \
     daytrack.h \
     sliderbutton.h \
     daytrackgroup.h \
-    timetip.h
+    timetip.h \
+    weekplaneditablepanel.h \
+    weekplancopyablepanel.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    weekplaneditablepanel.ui \
+    weekplancopyablepanel.ui

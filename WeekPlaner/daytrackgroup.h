@@ -19,7 +19,7 @@ public:
 
 signals:
     void DayTrackClicked(int, QRect);
-    void DayTrackOutSideClicked();
+    void DayTrackOutSideClicked(int id);
 
 public slots:
 

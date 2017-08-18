@@ -19,7 +19,7 @@ void DayTrackGroup::addDayTrack(DayTrack *dayTrack, int id)
         connect(dayTrack, &DayTrack::spliterOutsideClicked, this, [=](){
             setDayTracksUnSelected();
             checkId = -1;
-            emit DayTrackOutSideClicked();
+            emit DayTrackOutSideClicked(id);
         });
     }
 }

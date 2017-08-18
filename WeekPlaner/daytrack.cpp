@@ -8,19 +8,6 @@ DayTrack::DayTrack(QWidget *parent) : QFrame(parent), selected(-1)
     //setObjectName("DayTrack");
     //setStyleSheet("#DayTrack{border:1px solid gray;margin:13px}");
     //setFrameStyle(QFrame::Panel | QFrame::Box);
-
-    SegmentSpliter spliter;
-    spliter.start = (qreal)1/24;
-    spliter.end = (qreal)3/24;
-    spliters << spliter;
-
-    spliter.start = (qreal)5/24;
-    spliter.end = (qreal)8/24;
-    spliters << spliter;
-
-    spliter.start = (qreal)11/24;
-    spliter.end = (qreal)24/24;
-    spliters << spliter;
 }
 
 DayTrack::~DayTrack()
@@ -149,6 +136,23 @@ void DayTrack::setSpliters(const QList<SegmentSpliter> &value)
 {
     spliters = value;
     update();
+}
+
+void DayTrack::clearSpliters()
+{
+    QList<SegmentSpliter> list;
+    list.clear();
+    setSpliters(list);
+}
+
+void DayTrack::fullSpliters()
+{
+    SegmentSpliter spliter;
+    spliter.start = 0;
+    spliter.end = 1;
+    QList<SegmentSpliter> list;
+    list << spliter;
+    setSpliters(list);
 }
 
 SegmentSpliter DayTrack::getSelectedSpliter(bool &ok) const
