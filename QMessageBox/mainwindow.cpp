@@ -3,7 +3,7 @@
 #include "dialog.h"
 #include <QMessageBox>
 #include <QDebug>
-
+#include <QFile>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -23,15 +23,14 @@ void MainWindow::on_pushButton_clicked()
     QMessageBox::information(NULL, "Title", "Content", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
 #endif
 
-#if 1
+#if 0
     QMessageBox message(QMessageBox::NoIcon, "Title", "Content with icon.");
     QPixmap p = QPixmap(":/test/cc.png").scaled(QSize(30,30));
-    qDebug() << p.size();
     message.setIconPixmap(p);
     message.exec();
 #endif
 
-#if 0
+#if 1
     QMessageBox message(QMessageBox::NoIcon, "Show Qt", "Do you want to show Qt dialog?", QMessageBox::Yes | QMessageBox::No, NULL);
     if(message.exec() == QMessageBox::Yes){
         QMessageBox::aboutQt(NULL, "About Qt");

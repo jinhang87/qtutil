@@ -1,0 +1,15 @@
+QMessageBox {
+    background-color: yellow;
+    dialogbuttonbox-buttons-have-icons: true;
+    dialog-ok-icon: url(:/test/ok.png);
+    dialog-cancel-icon: url(:/test/cancel.png),
+                        url(:/test/grayed_cancel.png) disabled;
+}
+QPushButton {
+    background-color: green;
+    border: none;
+    font-size: 16px;
+    font: bold italic large "Times New Roman";
+    margin: 2px;
+    min-width: 80px;
+}
