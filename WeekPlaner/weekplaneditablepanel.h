@@ -6,6 +6,7 @@
 namespace Ui {
 class WeekPlanEditablePanel;
 }
+class DayTrack;
 class DayTrackGroup;
 class TimeTip;
 class WeekPlanEditablePanel : public QWidget
@@ -15,11 +16,16 @@ class WeekPlanEditablePanel : public QWidget
 public:
     explicit WeekPlanEditablePanel(QWidget *parent = 0);
     ~WeekPlanEditablePanel();
+    void setCopyableId(const QList<int>& listId);
+    int getSelectedId() const;
+    DayTrack *getSelectedDayTrack() const;
+    DayTrackGroup *getDayGroup() const;
 
 private:
     Ui::WeekPlanEditablePanel *ui;
     DayTrackGroup *dayGroup;
     TimeTip *tip;
+    int selectedId;
 };
 
 #endif // WEEKPLANEDITABLEPANEL_H

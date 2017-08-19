@@ -52,6 +52,17 @@ int DayTrackGroup::id(DayTrack *dayTrack) const
     return id;
 }
 
+QList<DayTrack *> DayTrackGroup::dayTracks() const
+{
+   QList<DayTrack *> list;
+   QMapIterator<int, DayTrack *> it(mapDayTracks);
+   while (it.hasNext()) {
+       it.next();
+       list << it.value();
+   }
+   return list;
+}
+
 bool DayTrackGroup::copyto(int source, int destination)
 {
     DayTrack *dayTrackDestination = dayTrack(destination);
@@ -62,6 +73,27 @@ bool DayTrackGroup::copyto(int source, int destination)
         return true;
     }else{
         return false;
+    }
+}
+
+bool DayTrackGroup::copyto(const DayTrack *source, int destination)
+{
+    DayTrack *dayTrackDestination = dayTrack(destination);
+    if(source && dayTrackDestination){
+        dayTrackDestination->setSpliters(source->getSpliters());
+        return true;
+    }else{
+        return false;
+    }
+}
+
+void DayTrackGroup::clear()
+{
+    QMapIterator<int, DayTrack *> it(mapDayTracks);
+    while (it.hasNext()) {
+        it.next();
+        DayTrack *dayTrack = it.value();
+        dayTrack->clearSpliters();
     }
 }
 

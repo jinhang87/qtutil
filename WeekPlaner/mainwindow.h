@@ -7,6 +7,7 @@ namespace Ui {
 class MainWindow;
 }
 
+class DayTrack;
 class DayTrackGroup;
 class TimeTip;
 
@@ -18,13 +19,25 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     void mousePressEvent(QMouseEvent *e);
+
 private slots:
-    void on_pushButton_clicked();
+    void on_copytopushbutton_clicked();
+    void on_newpushbutton_clicked();
+    void on_deletepushbutton_clicked();
+    void on_clearpushbutton_clicked();
+
+    void on_okpushButton_clicked();
+
+    void on_cancelpushButton_clicked();
 
 private:
     Ui::MainWindow *ui;
     DayTrackGroup *dayGroup;
     TimeTip *tip;
+
+    int editWidgetSelectedId;
+    DayTrack* editWidgetSelectedDaytrack;
+    QList<int> copyWidgetCheckedId;
 };
 
 #endif // MAINWINDOW_H

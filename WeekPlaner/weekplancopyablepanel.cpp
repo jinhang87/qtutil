@@ -9,26 +9,6 @@ WeekPlanCopyablePanel::WeekPlanCopyablePanel(QWidget *parent) :
     ui(new Ui::WeekPlanCopyablePanel), sourceId(0)
 {
     ui->setupUi(this);
-
-    //for test
-    sourceId = 5;
-
-    QList<SegmentSpliter> spliters;
-    SegmentSpliter spliter;
-    spliter.start = (qreal)1/24;
-    spliter.end = (qreal)3/24;
-    spliters << spliter;
-
-    spliter.start = (qreal)5/24;
-    spliter.end = (qreal)8/24;
-    spliters << spliter;
-    ui->frame->setSpliters(spliters);
-
-    spliter.start = (qreal)11/24;
-    spliter.end = (qreal)24/24;
-    spliters << spliter;
-    ui->frame_5->setSpliters(spliters);
-
     dayGroup = new DayTrackGroup(this);
     dayGroup->addDayTrack(ui->frame, 1);
     dayGroup->addDayTrack(ui->frame_2, 2);
@@ -49,27 +29,6 @@ WeekPlanCopyablePanel::WeekPlanCopyablePanel(QWidget *parent) :
     for(i = 1; i <= 7; i++){
         hashChecked[1] = false;
     }
-
-
-#if 0
-    connect(dayGroup, &DayTrackGroup::DayTrackClicked, this, [=](int id, QRect){
-        if(id == sourceId){
-            return;
-        }
-        DayTrack *dayTrack = dayGroup->dayTrack(id);
-        dayTrack->clearSpliters();
-    });
-
-    connect(dayGroup, &DayTrackGroup::DayTrackOutSideClicked, this, [=](int id){
-        qDebug() << "DayTrackGroup::DayTrackOutSideClicked" << id;
-        DayTrack *dayTrackDestination = dayGroup->dayTrack(id);
-        DayTrack *dayTrackSource = dayGroup->dayTrack(sourceId);
-        if(dayTrackSource && dayTrackDestination){
-            dayTrackDestination->setSpliters(dayTrackSource->getSpliters());
-        }
-    });
-#endif
-
 }
 
 WeekPlanCopyablePanel::~WeekPlanCopyablePanel()
@@ -82,9 +41,31 @@ int WeekPlanCopyablePanel::getSourceId() const
     return sourceId;
 }
 
-void WeekPlanCopyablePanel::setSourceId(int value)
+void WeekPlanCopyablePanel::setSourceId(int id, const DayTrack* daytrack)
 {
-    sourceId = value;
+    if(daytrack){
+        sourceId = id;
+        dayGroup->copyto(daytrack, id);
+    }
+}
+
+QList<int> WeekPlanCopyablePanel::checkedId() const
+{
+    QList<int> list;
+    QHashIterator<int, bool> it(hashChecked);
+    while (it.hasNext()) {
+        it.next();
+        if(it.value()){
+            list<<it.key();
+        }
+    }
+    return list;
+}
+
+void WeekPlanCopyablePanel::clear()
+{
+    sourceId = -1;
+    dayGroup->clear();
 }
 
 bool WeekPlanCopyablePanel::eventFilter(QObject *watched, QEvent *event)
@@ -98,9 +79,11 @@ bool WeekPlanCopyablePanel::eventFilter(QObject *watched, QEvent *event)
             if(!hashChecked[id]){
                 dayGroup->copyto(sourceId, id);
                 hashChecked[id] = true;
+                emit checkedIdChanged(id, true);
             }else{
                 dayGroup->dayTrack(id)->clearSpliters();
                 hashChecked[id] = false;
+                emit checkedIdChanged(id, false);
             }
             return true;
         }

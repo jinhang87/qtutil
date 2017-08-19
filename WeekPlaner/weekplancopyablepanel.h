@@ -6,6 +6,7 @@
 namespace Ui {
 class WeekPlanCopyablePanel;
 }
+class DayTrack;
 class DayTrackGroup;
 class TimeTip;
 class WeekPlanCopyablePanel : public QWidget
@@ -15,12 +16,16 @@ class WeekPlanCopyablePanel : public QWidget
 public:
     explicit WeekPlanCopyablePanel(QWidget *parent = 0);
     ~WeekPlanCopyablePanel();
-
     int getSourceId() const;
-    void setSourceId(int value);
+    void setSourceId(int value, const DayTrack *daytrack);
+    QList<int> checkedId() const;
+    void clear();
 
 protected:
     bool eventFilter(QObject *watched, QEvent *event);
+
+signals:
+    void checkedIdChanged(int id, bool bChecked);
 
 private:
     Ui::WeekPlanCopyablePanel *ui;

@@ -25,7 +25,7 @@ void TimeTip::setCentralRect(const QRect &rect)
     if(p != right->pos())
         right->move(p);
 
-    p = QPoint(rect.topLeft().x() + (rect.width()/2) - (detail->width()/2), rect.topLeft().y() - detail->height() - 15);
+    p = QPoint(rect.topLeft().x() + (rect.width()/2) - (detail->width()/2), rect.topLeft().y() - detail->height() );
     if(p != detail->pos())
         detail->move(p);
 }
