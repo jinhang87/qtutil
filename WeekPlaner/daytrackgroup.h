@@ -17,6 +17,8 @@ public:
     DayTrack *dayTrack(int id) const;
     int id(DayTrack *dayTrack) const;
 
+    bool copyto(int source, int destination);
+
 signals:
     void DayTrackClicked(int, QRect);
     void DayTrackOutSideClicked(int id);

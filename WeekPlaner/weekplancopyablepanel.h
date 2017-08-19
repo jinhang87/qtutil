@@ -19,10 +19,14 @@ public:
     int getSourceId() const;
     void setSourceId(int value);
 
+protected:
+    bool eventFilter(QObject *watched, QEvent *event);
+
 private:
     Ui::WeekPlanCopyablePanel *ui;
     DayTrackGroup *dayGroup;
     int sourceId;
+    QHash<int, bool> hashChecked;
 };
 
 #endif // WEEKPLANCOPYABLEPANEL_H

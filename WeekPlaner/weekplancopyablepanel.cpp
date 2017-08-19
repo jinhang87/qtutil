@@ -11,7 +11,7 @@ WeekPlanCopyablePanel::WeekPlanCopyablePanel(QWidget *parent) :
     ui->setupUi(this);
 
     //for test
-    sourceId = 1;
+    sourceId = 5;
 
     QList<SegmentSpliter> spliters;
     SegmentSpliter spliter;
@@ -27,7 +27,7 @@ WeekPlanCopyablePanel::WeekPlanCopyablePanel(QWidget *parent) :
     spliter.start = (qreal)11/24;
     spliter.end = (qreal)24/24;
     spliters << spliter;
-    ui->frame_2->setSpliters(spliters);
+    ui->frame_5->setSpliters(spliters);
 
     dayGroup = new DayTrackGroup(this);
     dayGroup->addDayTrack(ui->frame, 1);
@@ -37,7 +37,21 @@ WeekPlanCopyablePanel::WeekPlanCopyablePanel(QWidget *parent) :
     dayGroup->addDayTrack(ui->frame_5, 5);
     dayGroup->addDayTrack(ui->frame_6, 6);
     dayGroup->addDayTrack(ui->frame_7, 7);
+    ui->frame->installEventFilter(this);
+    ui->frame_2->installEventFilter(this);
+    ui->frame_3->installEventFilter(this);
+    ui->frame_4->installEventFilter(this);
+    ui->frame_5->installEventFilter(this);
+    ui->frame_6->installEventFilter(this);
+    ui->frame_7->installEventFilter(this);
 
+    int i = 1;
+    for(i = 1; i <= 7; i++){
+        hashChecked[1] = false;
+    }
+
+
+#if 0
     connect(dayGroup, &DayTrackGroup::DayTrackClicked, this, [=](int id, QRect){
         if(id == sourceId){
             return;
@@ -53,8 +67,8 @@ WeekPlanCopyablePanel::WeekPlanCopyablePanel(QWidget *parent) :
         if(dayTrackSource && dayTrackDestination){
             dayTrackDestination->setSpliters(dayTrackSource->getSpliters());
         }
-
     });
+#endif
 
 }
 
@@ -71,4 +85,25 @@ int WeekPlanCopyablePanel::getSourceId() const
 void WeekPlanCopyablePanel::setSourceId(int value)
 {
     sourceId = value;
+}
+
+bool WeekPlanCopyablePanel::eventFilter(QObject *watched, QEvent *event)
+{
+    int id = -1;
+    if(-1 != (id = dayGroup->id(qobject_cast<DayTrack*>(watched))) ){
+        if(id == sourceId){
+            return false;
+        }
+        if(event->type() == QEvent::MouseButtonRelease){
+            if(!hashChecked[id]){
+                dayGroup->copyto(sourceId, id);
+                hashChecked[id] = true;
+            }else{
+                dayGroup->dayTrack(id)->clearSpliters();
+                hashChecked[id] = false;
+            }
+            return true;
+        }
+    }
+    return QWidget::eventFilter(watched, event);
 }

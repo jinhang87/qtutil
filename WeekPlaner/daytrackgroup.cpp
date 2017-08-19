@@ -52,6 +52,19 @@ int DayTrackGroup::id(DayTrack *dayTrack) const
     return id;
 }
 
+bool DayTrackGroup::copyto(int source, int destination)
+{
+    DayTrack *dayTrackDestination = dayTrack(destination);
+    DayTrack *dayTrackSource = dayTrack(source);
+
+    if(dayTrackSource && dayTrackDestination){
+        dayTrackDestination->setSpliters(dayTrackSource->getSpliters());
+        return true;
+    }else{
+        return false;
+    }
+}
+
 void DayTrackGroup::setDayTracksUnSelected(int exceptionalId)
 {
     QMapIterator<int, DayTrack *> it(mapDayTracks);
