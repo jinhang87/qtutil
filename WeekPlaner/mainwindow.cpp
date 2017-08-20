@@ -21,19 +21,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QStateMachine *machine = new QStateMachine(this);
     QState* editState = new QState;
-    QState* editInitial = new QState(editState);
     QState* editSelected = new QState(editState);
     QState* editUnSelected = new QState(editState);
     QState* copyState = new QState;
     QState* copyInitial = new QState(copyState);
     QFinalState* copyOk = new QFinalState(copyState);
     QFinalState* copyCanecl = new QFinalState(copyState);
-    editState->setInitialState(editInitial);
+    editState->setInitialState(editUnSelected);
     copyState->setInitialState(copyInitial);
     editState->addTransition(ui->copytopushbutton, SIGNAL(clicked()), copyState);
     WeekPlanEditablePanel* editWidget1 = qobject_cast<WeekPlanEditablePanel*>(ui->stackedWidget->widget(0));
-    editInitial->addTransition(editWidget1, SIGNAL(selectedSignal()), editSelected);
-    editInitial->addTransition(editWidget1, SIGNAL(unSelectedSignal()), editUnSelected);
     editSelected->addTransition(editWidget1, SIGNAL(unSelectedSignal()), editUnSelected);
     editUnSelected->addTransition(editWidget1, SIGNAL(selectedSignal()), editSelected);
     copyInitial->addTransition(ui->buttonBox, SIGNAL(accepted()), copyOk);
@@ -76,9 +73,7 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->deletepushbutton->setDisabled(true);
         ui->buttonBox->show();
     });
-    connect(editInitial, &QState::entered, this, [=](){
-        qDebug() << "editInitial entered";
-    });
+
     connect(copyOk, &QState::entered, this, [=](){
         qDebug() << "copyOk entered";
         WeekPlanEditablePanel* editWidget = qobject_cast<WeekPlanEditablePanel*>(ui->stackedWidget->widget(0));
