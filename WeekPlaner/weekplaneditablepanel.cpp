@@ -50,11 +50,16 @@ WeekPlanEditablePanel::WeekPlanEditablePanel(QWidget *parent) :
         tip->setText(text);
         tip->show();
         selectedId = id;
+        emit selectedIdChanged(selectedId);
+        emit selectedSignal();
     });
 
 
     connect(dayGroup, &DayTrackGroup::DayTrackOutSideClicked, this, [=](int){
         tip->hide();
+        selectedId = -1;
+        emit selectedIdChanged(selectedId);
+        emit unSelectedSignal();
     });
 }
 

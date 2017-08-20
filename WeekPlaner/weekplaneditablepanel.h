@@ -21,6 +21,11 @@ public:
     DayTrack *getSelectedDayTrack() const;
     DayTrackGroup *getDayGroup() const;
 
+signals:
+    void selectedIdChanged(int selectedId);
+    void selectedSignal();
+    void unSelectedSignal();
+
 private:
     Ui::WeekPlanEditablePanel *ui;
     DayTrackGroup *dayGroup;
