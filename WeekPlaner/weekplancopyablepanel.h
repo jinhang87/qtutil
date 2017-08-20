@@ -19,7 +19,6 @@ public:
     int getSourceId() const;
     void setSourceId(int value, const DayTrack *daytrack);
     QList<int> checkedId() const;
-    void clear();
 
 protected:
     bool eventFilter(QObject *watched, QEvent *event);

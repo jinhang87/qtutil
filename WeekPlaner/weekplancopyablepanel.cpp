@@ -62,12 +62,6 @@ QList<int> WeekPlanCopyablePanel::checkedId() const
     return list;
 }
 
-void WeekPlanCopyablePanel::clear()
-{
-    sourceId = -1;
-    dayGroup->clear();
-}
-
 bool WeekPlanCopyablePanel::eventFilter(QObject *watched, QEvent *event)
 {
     int id = -1;

@@ -50,8 +50,10 @@
         </item>
         <item>
          <widget class="QStackedWidget" name="stackedWidget">
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
           <widget class="WeekPlanEditablePanel" name="editablePanel"/>
-          <widget class="WeekPlanCopyablePanel" name="copyablePanel"/>
          </widget>
         </item>
        </layout>
@@ -90,23 +92,13 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="QPushButton" name="okpushButton">
-        <property name="text">
-         <string>ok</string>
+      <item row="3" column="1">
+       <widget class="QDialogButtonBox" name="buttonBox">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
         </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QPushButton" name="cancelpushButton">
-        <property name="minimumSize">
-         <size>
-          <width>75</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>cancel</string>
+        <property name="standardButtons">
+         <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
         </property>
        </widget>
       </item>
@@ -120,7 +112,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
@@ -136,12 +128,6 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
-  <customwidget>
-   <class>WeekPlanCopyablePanel</class>
-   <extends>QWidget</extends>
-   <header>weekplancopyablepanel.h</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>WeekPlanEditablePanel</class>
    <extends>QWidget</extends>
