@@ -51,6 +51,7 @@ public:
     int getSelected() const;
     void setSelected(int value);
     QRect getSelectedRect();
+    void removeSelected();
 
     QRect spliterToRect(const SegmentSpliter &spliter);
     SegmentSpliter rectToSpliter(const QRect &rect);

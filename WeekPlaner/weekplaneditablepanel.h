@@ -19,6 +19,7 @@ public:
     void setCopyableId(const QList<int>& listId);
     int getSelectedId() const;
     DayTrack *getSelectedDayTrack() const;
+    void removeSelectedDayTrack();
     DayTrackGroup *getDayGroup() const;
 
 signals:

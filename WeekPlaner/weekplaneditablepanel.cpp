@@ -91,6 +91,14 @@ DayTrack* WeekPlanEditablePanel::getSelectedDayTrack() const
     }
 }
 
+void WeekPlanEditablePanel::removeSelectedDayTrack()
+{
+    DayTrack* daytrack = getSelectedDayTrack();
+    if(daytrack){
+        daytrack->removeSelected();
+    }
+}
+
 DayTrackGroup *WeekPlanEditablePanel::getDayGroup() const
 {
     return dayGroup;

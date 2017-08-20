@@ -57,11 +57,13 @@ MainWindow::MainWindow(QWidget *parent) :
     });
     connect(editSelected, &QState::entered, this, [=](){
         qDebug() << "editSelected entered";
+        ui->copytopushbutton->setDisabled(false);
         ui->newpushbutton->setDisabled(false);
         ui->deletepushbutton->setDisabled(false);
     });
     connect(editUnSelected, &QState::entered, this, [=](){
         qDebug() << "editUnSelected entered";
+        ui->copytopushbutton->setDisabled(true);
         ui->newpushbutton->setDisabled(true);
         ui->deletepushbutton->setDisabled(true);
     });
@@ -114,6 +116,11 @@ void MainWindow::on_newpushbutton_clicked()
 
 void MainWindow::on_deletepushbutton_clicked()
 {
+    qDebug() << "on_deletepushbutton_clicked";
+    WeekPlanEditablePanel* editWidget = qobject_cast<WeekPlanEditablePanel*>(ui->stackedWidget->widget(0));
+    if(editWidget){
+        editWidget->removeSelectedDayTrack();
+    }
 
 }
 

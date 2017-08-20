@@ -127,6 +127,15 @@ QRect DayTrack::getSelectedRect()
     return rect;
 }
 
+void DayTrack::removeSelected()
+{
+    if(selected >= 0 && selected < spliters.size()){
+        spliters.removeAt(selected);
+        update();
+        emit spliterOutsideClicked();
+    }
+}
+
 QList<SegmentSpliter> DayTrack::getSpliters() const
 {
     return spliters;
