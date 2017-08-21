@@ -8,8 +8,12 @@
 #include <QDialogButtonBox>
 #include <QStateMachine>
 
+namespace Ui {
+class WeekPlaner;
+}
 class WeekPlanEditablePanel;
 class WeekPlanCopyablePanel;
+
 class WeekPlaner : public QWidget
 {
     Q_OBJECT
@@ -46,6 +50,7 @@ private:
     QPushButton* m_deletepushbutton = nullptr;
     QDialogButtonBox* m_buttonBox = nullptr;
     QSharedPointer<QStateMachine> m_machine;
+    Ui::WeekPlaner *ui;
 };
 
 #endif // WEEKPLANER_H

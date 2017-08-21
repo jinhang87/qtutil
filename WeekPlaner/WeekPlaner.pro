@@ -36,4 +36,5 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui \
     weekplaneditablepanel.ui \
     weekplancopyablepanel.ui \
-    mainwindowweekplaner.ui
+    mainwindowweekplaner.ui \
+    weekplaner.ui

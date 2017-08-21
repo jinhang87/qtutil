@@ -1,4 +1,5 @@
 #include "weekplaner.h"
+#include "ui_weekplaner.h"
 #include "weekplancopyablepanel.h"
 #include "weekplaneditablepanel.h"
 
@@ -6,9 +7,10 @@
 #include <QFinalState>
 #include <QDebug>
 
-WeekPlaner::WeekPlaner(QWidget *parent) : QWidget(parent)
+WeekPlaner::WeekPlaner(QWidget *parent) : QWidget(parent), ui(new Ui::WeekPlaner)
 {
-    m_stackedWidget = new QStackedWidget(this);
+    ui->setupUi(this);
+    m_stackedWidget = ui->stackedWidget;
     m_editWidget.reset(new WeekPlanEditablePanel(this));
     m_copyWidget.reset(new WeekPlanCopyablePanel(this));
     m_stackedWidget->addWidget(m_editWidget.data());
