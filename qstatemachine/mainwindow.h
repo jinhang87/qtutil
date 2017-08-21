@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QStateMachine>
+#include <QSharedPointer>
+
 namespace Ui {
 class MainWindow;
 }
@@ -15,9 +17,13 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+    void on_pushButton_3_clicked();
+    void machineReset();
+
 private:
     Ui::MainWindow *ui;
-    QStateMachine machine;
+    QSharedPointer<QStateMachine> machine;
 };
 
 #endif // MAINWINDOW_H
