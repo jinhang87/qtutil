@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QSharedPointer>
 
 namespace Ui {
 class MainWindow;
@@ -10,6 +11,7 @@ class MainWindow;
 class DayTrack;
 class DayTrackGroup;
 class TimeTip;
+class WeekPlanCopyablePanel;
 
 class MainWindow : public QMainWindow
 {
@@ -26,18 +28,13 @@ private slots:
     void on_deletepushbutton_clicked();
     void on_clearpushbutton_clicked();
 
-    void on_okpushButton_clicked();
-
-    void on_cancelpushButton_clicked();
-
+private:
+    void resetCopyWidget();
 private:
     Ui::MainWindow *ui;
     DayTrackGroup *dayGroup;
     TimeTip *tip;
-
-    int editWidgetSelectedId;
-    DayTrack* editWidgetSelectedDaytrack;
-    QList<int> copyWidgetCheckedId;
+    QSharedPointer<WeekPlanCopyablePanel> copyWidget;
 };
 
 #endif // MAINWINDOW_H

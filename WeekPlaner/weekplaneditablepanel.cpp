@@ -50,11 +50,16 @@ WeekPlanEditablePanel::WeekPlanEditablePanel(QWidget *parent) :
         tip->setText(text);
         tip->show();
         selectedId = id;
+        emit selectedIdChanged(selectedId);
+        emit selectedSignal();
     });
 
 
     connect(dayGroup, &DayTrackGroup::DayTrackOutSideClicked, this, [=](int){
         tip->hide();
+        selectedId = -1;
+        emit selectedIdChanged(selectedId);
+        emit unSelectedSignal();
     });
 }
 
@@ -83,6 +88,14 @@ DayTrack* WeekPlanEditablePanel::getSelectedDayTrack() const
         return dayGroup->dayTrack(selectedId);
     }else{
         return nullptr;
+    }
+}
+
+void WeekPlanEditablePanel::removeSelectedDayTrack()
+{
+    DayTrack* daytrack = getSelectedDayTrack();
+    if(daytrack){
+        daytrack->removeSelected();
     }
 }
 

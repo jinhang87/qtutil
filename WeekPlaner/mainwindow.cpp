@@ -7,51 +7,86 @@
 #include <QDebug>
 #include <QMouseEvent>
 #include <QStateMachine>
+#include <QFinalState>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->stackedWidget->setCurrentIndex(0);
 
+    copyWidget = QSharedPointer<WeekPlanCopyablePanel>(new WeekPlanCopyablePanel(this));
+    ui->stackedWidget->setCurrentIndex(0);
+    resetCopyWidget();
 
     QStateMachine *machine = new QStateMachine(this);
     QState* editState = new QState;
+    QState* editSelected = new QState(editState);
+    QState* editUnSelected = new QState(editState);
     QState* copyState = new QState;
+    QState* copyInitial = new QState(copyState);
+    QFinalState* copyOk = new QFinalState(copyState);
+    QFinalState* copyCanecl = new QFinalState(copyState);
+    editState->setInitialState(editUnSelected);
+    copyState->setInitialState(copyInitial);
     editState->addTransition(ui->copytopushbutton, SIGNAL(clicked()), copyState);
-    copyState->addTransition(ui->okpushButton, SIGNAL(clicked()), editState);
+    WeekPlanEditablePanel* editWidget1 = qobject_cast<WeekPlanEditablePanel*>(ui->stackedWidget->widget(0));
+    editSelected->addTransition(editWidget1, SIGNAL(unSelectedSignal()), editUnSelected);
+    editUnSelected->addTransition(editWidget1, SIGNAL(selectedSignal()), editSelected);
+    copyInitial->addTransition(ui->buttonBox, SIGNAL(accepted()), copyOk);
+    copyInitial->addTransition(ui->buttonBox, SIGNAL(rejected()), copyCanecl);
+    copyState->addTransition(copyState, SIGNAL(finished()), editState);
 
-    //WeekPlanEditablePanel* editWidget = qobject_cast<WeekPlanEditablePanel*>(ui->stackedWidget->widget(0));
-    //WeekPlanCopyablePanel* copyWidget = qobject_cast<WeekPlanCopyablePanel*>(ui->stackedWidget->widget(1));
-
-    connect(editState, &QState::entered, this, [&](){
-        qDebug()<< "editState entered";
-        WeekPlanEditablePanel* editWidget = qobject_cast<WeekPlanEditablePanel*>(ui->stackedWidget->widget(0));
-        editWidget->setCopyableId(copyWidgetCheckedId);
+    connect(editState, &QState::entered, this, [=](){
         ui->stackedWidget->setCurrentIndex(0);
+        ui->copytopushbutton->setDisabled(false);
+        ui->newpushbutton->setDisabled(false);
+        ui->deletepushbutton->setDisabled(false);
+        ui->buttonBox->hide();
     });
-
-    connect(editState, &QState::exited, this, [&](){
-        qDebug()<< "editState exited";
+    connect(editState, &QState::exited, this, [=](){
+        qDebug() << "editState exited";
         WeekPlanEditablePanel* editWidget = qobject_cast<WeekPlanEditablePanel*>(ui->stackedWidget->widget(0));
-        editWidgetSelectedId = editWidget->getSelectedId();
-        editWidgetSelectedDaytrack = editWidget->getSelectedDayTrack();
-        qDebug()<< editWidgetSelectedId;
+        if(editWidget){
+            int selectedId = editWidget->getSelectedId();
+            DayTrack* daytrack = editWidget->getSelectedDayTrack();
+            resetCopyWidget();
+            qDebug()<< ui->stackedWidget->count();
+            copyWidget->setSourceId(selectedId, daytrack);
+        }
     });
-
-    connect(copyState, &QState::entered, this, [&](){
-        qDebug()<< "copyState entered";
-        WeekPlanCopyablePanel* copyWidget = qobject_cast<WeekPlanCopyablePanel*>(ui->stackedWidget->widget(1));
-        copyWidget->clear();
-        copyWidget->setSourceId(editWidgetSelectedId, editWidgetSelectedDaytrack);
+    connect(editSelected, &QState::entered, this, [=](){
+        qDebug() << "editSelected entered";
+        ui->copytopushbutton->setDisabled(false);
+        ui->newpushbutton->setDisabled(false);
+        ui->deletepushbutton->setDisabled(false);
+    });
+    connect(editUnSelected, &QState::entered, this, [=](){
+        qDebug() << "editUnSelected entered";
+        ui->copytopushbutton->setDisabled(true);
+        ui->newpushbutton->setDisabled(true);
+        ui->deletepushbutton->setDisabled(true);
+    });
+    connect(copyState, &QState::entered, this, [=](){
+        qDebug() << "copyState entered";
         ui->stackedWidget->setCurrentIndex(1);
+        ui->copytopushbutton->setDisabled(true);
+        ui->newpushbutton->setDisabled(true);
+        ui->deletepushbutton->setDisabled(true);
+        ui->buttonBox->show();
     });
 
-    connect(copyState, &QState::exited, this, [&](){
-        qDebug()<< "copyState exited";
-        WeekPlanCopyablePanel* copyWidget = qobject_cast<WeekPlanCopyablePanel*>(ui->stackedWidget->widget(1));
-        copyWidgetCheckedId = copyWidget->checkedId();
+    connect(copyOk, &QState::entered, this, [=](){
+        qDebug() << "copyOk entered";
+        WeekPlanEditablePanel* editWidget = qobject_cast<WeekPlanEditablePanel*>(ui->stackedWidget->widget(0));
+        if(editWidget){
+            QList<int> listCheckedId = copyWidget->checkedId();
+            editWidget->setCopyableId(listCheckedId);
+            qDebug()<< listCheckedId;
+        }
+    });
+    connect(copyCanecl, &QState::entered, this, [=](){
+        qDebug() << "copyCanecl entered";
     });
 
     machine->addState(editState);
@@ -72,17 +107,6 @@ void MainWindow::mousePressEvent(QMouseEvent *e)
 
 void MainWindow::on_copytopushbutton_clicked()
 {
-#if 0
-    WeekPlanEditablePanel* editWidget = qobject_cast<WeekPlanEditablePanel*>(ui->stackedWidget->widget(0));
-    WeekPlanCopyablePanel* copyWidget = qobject_cast<WeekPlanCopyablePanel*>(ui->stackedWidget->widget(1));
-    if(editWidget && copyWidget){
-        int selectedId = editWidget->getSelectedId();
-        DayTrack* daytrack = editWidget->getSelectedDayTrack();
-        copyWidget->clear();
-        copyWidget->setSourceId(selectedId, daytrack);
-        ui->stackedWidget->setCurrentIndex(1);
-    }
-#endif
 }
 
 void MainWindow::on_newpushbutton_clicked()
@@ -92,6 +116,11 @@ void MainWindow::on_newpushbutton_clicked()
 
 void MainWindow::on_deletepushbutton_clicked()
 {
+    qDebug() << "on_deletepushbutton_clicked";
+    WeekPlanEditablePanel* editWidget = qobject_cast<WeekPlanEditablePanel*>(ui->stackedWidget->widget(0));
+    if(editWidget){
+        editWidget->removeSelectedDayTrack();
+    }
 
 }
 
@@ -99,20 +128,10 @@ void MainWindow::on_clearpushbutton_clicked()
 {
 }
 
-void MainWindow::on_okpushButton_clicked()
+void MainWindow::resetCopyWidget()
 {
-#if 0
-    WeekPlanEditablePanel* editWidget = qobject_cast<WeekPlanEditablePanel*>(ui->stackedWidget->widget(0));
-    WeekPlanCopyablePanel* copyWidget = qobject_cast<WeekPlanCopyablePanel*>(ui->stackedWidget->widget(1));
-    if(editWidget && copyWidget){
-        QList<int> listCheckedId = copyWidget->checkedId();
-        editWidget->setCopyableId(listCheckedId);
-        ui->stackedWidget->setCurrentIndex(0);
-    }
-#endif
+    ui->stackedWidget->removeWidget(copyWidget.data());
+    copyWidget.reset(new WeekPlanCopyablePanel(this));
+    ui->stackedWidget->addWidget(copyWidget.data());
 }
 
-void MainWindow::on_cancelpushButton_clicked()
-{
-
-}

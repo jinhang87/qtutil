@@ -19,7 +19,13 @@ public:
     void setCopyableId(const QList<int>& listId);
     int getSelectedId() const;
     DayTrack *getSelectedDayTrack() const;
+    void removeSelectedDayTrack();
     DayTrackGroup *getDayGroup() const;
+
+signals:
+    void selectedIdChanged(int selectedId);
+    void selectedSignal();
+    void unSelectedSignal();
 
 private:
     Ui::WeekPlanEditablePanel *ui;
