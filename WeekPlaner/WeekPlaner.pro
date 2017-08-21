@@ -19,7 +19,9 @@ SOURCES += main.cpp\
     daytrackgroup.cpp \
     timetip.cpp \
     weekplaneditablepanel.cpp \
-    weekplancopyablepanel.cpp
+    weekplancopyablepanel.cpp \
+    weekplaner.cpp \
+    mainwindowweekplaner.cpp
 
 HEADERS  += mainwindow.h \
     daytrack.h \
@@ -27,8 +29,11 @@ HEADERS  += mainwindow.h \
     daytrackgroup.h \
     timetip.h \
     weekplaneditablepanel.h \
-    weekplancopyablepanel.h
+    weekplancopyablepanel.h \
+    weekplaner.h \
+    mainwindowweekplaner.h
 
 FORMS    += mainwindow.ui \
     weekplaneditablepanel.ui \
-    weekplancopyablepanel.ui
+    weekplancopyablepanel.ui \
+    mainwindowweekplaner.ui

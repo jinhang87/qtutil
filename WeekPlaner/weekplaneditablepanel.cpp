@@ -27,7 +27,10 @@ WeekPlanEditablePanel::WeekPlanEditablePanel(QWidget *parent) :
     spliter.end = (qreal)24/24;
     spliters << spliter;
     ui->frame_3->setSpliters(spliters);
+
+    qDebug() << "WeekPlanEditablePanel test";
 #endif
+
 
     dayGroup = new DayTrackGroup(this);
     dayGroup->addDayTrack(ui->frame, 1);
