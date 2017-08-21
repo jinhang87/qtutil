@@ -14,9 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         widget.cpp \
-    subwidget.cpp
+    subwidget.cpp \
+    dialog.cpp
 
 HEADERS  += widget.h \
-    subwidget.h
+    subwidget.h \
+    dialog.h
 
-FORMS    += widget.ui
+FORMS    += widget.ui \
+    dialog.ui
