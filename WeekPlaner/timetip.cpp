@@ -17,17 +17,33 @@ void TimeTip::setCentralRect(const QRect &rect)
 {
     QPoint p;
 
-    p = QPoint(rect.bottomLeft().x() - left->width() , rect.bottomLeft().y());
-    if(p != left->pos())
+    if(rect.bottomLeft().x() > left->width()){
+        p = QPoint(rect.bottomLeft().x() - left->width() , rect.bottomLeft().y());
+    }else{
+        p = QPoint(0 , rect.bottomLeft().y());
+    }
+    if(p != left->pos()){
         left->move(p);
+    }
 
-    p = QPoint(rect.bottomRight().x() , rect.bottomRight().y());
-    if(p != right->pos())
+    if(rect.bottomRight().x() + right->width() < parentWidget()->width() ){
+        p = QPoint(rect.bottomRight().x() , rect.bottomRight().y());
+    }else{
+        p = QPoint(parentWidget()->width() - right->width(), rect.bottomRight().y());
+    }
+    if(p != right->pos()){
         right->move(p);
+    }
 
-    p = QPoint(rect.topLeft().x() + (rect.width()/2) - (detail->width()/2), rect.topLeft().y() - detail->height() );
-    if(p != detail->pos())
+    int x = 0, y = 0;
+    x = rect.topLeft().x() + (rect.width()/2) - (detail->width()/2);
+    x = (x > 0) ? x : 0;
+    x = ((x + detail->width()) < parentWidget()->width()) ? x : (parentWidget()->width() - detail->width());
+    y = rect.topLeft().y() - detail->height();
+    p = QPoint(x, y);
+    if(p != detail->pos()){
         detail->move(p);
+    }
 }
 
 void TimeTip::setText(const QString &text)

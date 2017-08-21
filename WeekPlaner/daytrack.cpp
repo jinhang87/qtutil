@@ -204,6 +204,9 @@ bool DayTrack::setSelectedSpliter(const SegmentSpliter &value)
         if(value.start >= value.end){
             return false;
         }
+        if(value.start<0 || value.end>1){
+            return false;
+        }
         if(value != spliters[selected]){
             spliters[selected] = value;
             update();
