@@ -11,7 +11,7 @@ int ChannelBoxModel::rowCount(const QModelIndex &parent) const
 {
     //if (!parent.isValid())
         //return 0;
-
+    Q_UNUSED(parent);
     int rowcount = 0;
     if(m_maxAnalogChannelNum>0){
         rowcount++;
@@ -27,7 +27,7 @@ int ChannelBoxModel::columnCount(const QModelIndex &parent) const
 {
     //if (!parent.isValid())
         //return 0;
-
+    Q_UNUSED(parent);
     return qMax(m_maxAnalogChannelNum, m_maxNetworkChannelNum);
 }
 
@@ -61,6 +61,8 @@ bool ChannelBoxModel::setData(const QModelIndex &index, const QVariant &value, i
     default:
         break;
     }
+
+    return false;
 }
 
 QModelIndex ChannelBoxModel::index(int row, int column, const QModelIndex &parent) const
@@ -92,7 +94,7 @@ void ChannelBoxModel::setMaxNetworkChannelNum(int maxNetworkChannelNum)
     endResetModel();
 }
 
-QMultiHash<ChannelFlag, int> ChannelBoxModel::hashChecked() const
+QMultiHash<ChannelBoxDialog::ChannelFlag, int> ChannelBoxModel::hashChecked() const
 {
     return m_hashChecked;
 }

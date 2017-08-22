@@ -9,6 +9,7 @@ namespace Ui {
 class ChannelBoxWidget;
 }
 
+enum ChannelFlag : int;
 class ChannelBoxWidget : public QWidget
 {
     Q_OBJECT
