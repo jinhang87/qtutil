@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QSharedPointer>
+#include <QMultiHash>
 
 namespace Ui {
 class ChannelBoxDialog;
@@ -26,6 +27,7 @@ public:
     void setMode(const Mode &mode);
 
 signals:
+    void accepted(const QMultiHash<ChannelFlag, int> &hash);
 
 private:
     void accept() override;

@@ -1,4 +1,5 @@
 #include "channelboxmodel.h"
+#include "channelboxdialog.h"
 #include <QDebug>
 
 ChannelBoxModel::ChannelBoxModel(QObject *parent)
@@ -37,9 +38,9 @@ QVariant ChannelBoxModel::data(const QModelIndex &index, int role) const
 
     switch(role){
     case Qt::DisplayRole:
-        //return listOptionsStrings.at(idx);
+        return QString::number(index.column());
     case Qt::CheckStateRole:
-        //return (idx == currentIdx) ? true : false;
+        return false;
     default:
         return QVariant();
     }
@@ -56,10 +57,8 @@ bool ChannelBoxModel::setData(const QModelIndex &index, const QVariant &value, i
     case Qt::DisplayRole:
         return false;
     case Qt::CheckStateRole:
-        //if(value.toBool()){
-            //currentIdx = idx;
-            //emit currentIdxChanged(idx);
-        //}
+        return true;
+    default:
         break;
     }
 }
@@ -92,3 +91,9 @@ void ChannelBoxModel::setMaxNetworkChannelNum(int maxNetworkChannelNum)
     m_maxNetworkChannelNum = maxNetworkChannelNum;
     endResetModel();
 }
+
+QMultiHash<ChannelFlag, int> ChannelBoxModel::hashChecked() const
+{
+    return m_hashChecked;
+}
+

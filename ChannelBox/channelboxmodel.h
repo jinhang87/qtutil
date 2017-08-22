@@ -3,7 +3,7 @@
 
 #include <QAbstractTableModel>
 
-enum class ChannelFlag;
+enum ChannelFlag : int;
 class ChannelBoxModel : public QAbstractTableModel
 {
     Q_OBJECT
@@ -24,10 +24,13 @@ public:
     int maxNetworkChannelNum() const;
     void setMaxNetworkChannelNum(int maxNetworkChannelNum);
 
+    QMultiHash<ChannelFlag, int> hashChecked() const;
+
 private:
     int m_maxAnalogChannelNum = 0;
     int m_maxNetworkChannelNum = 0;
-    QMultiHash<ChannelFlag, int> m_hashCheched;
+    QMultiHash<ChannelFlag, int> m_hashChecked;
+
 };
 
 #endif // CHANNELBOXMODEL_H
