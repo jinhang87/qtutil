@@ -23,6 +23,10 @@ public:
     QAbstractItemModel *model() const;
     void setModel(QAbstractItemModel *model);
 
+protected:
+    bool eventFilter(QObject *watched, QEvent *event);
+    virtual void paintEvent(QPaintEvent *e);
+
 private:
     void setupUi();
     Ui::ChannelBoxWidget *ui;

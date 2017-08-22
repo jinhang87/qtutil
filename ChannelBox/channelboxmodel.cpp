@@ -57,6 +57,19 @@ bool ChannelBoxModel::setData(const QModelIndex &index, const QVariant &value, i
     case Qt::DisplayRole:
         return false;
     case Qt::CheckStateRole:
+        ChannelBoxDialog::ChannelFlag flag;
+        if(m_maxAnalogChannelNum==0){
+            flag = ChannelBoxDialog::Network;
+        }else if(m_maxNetworkChannelNum ==0){
+            flag = ChannelBoxDialog::Analog;
+        }else{
+            flag = (index.row() == 0) ? ChannelBoxDialog::Analog : ChannelBoxDialog::Network;
+        }
+        if(value.toBool()){
+            m_hashChecked.insert(flag, index.column());
+        }else{
+            m_hashChecked.remove(flag, index.column());
+        }
         return true;
     default:
         break;

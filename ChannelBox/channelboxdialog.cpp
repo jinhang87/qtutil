@@ -20,8 +20,7 @@ ChannelBoxDialog::~ChannelBoxDialog()
 
 void ChannelBoxDialog::accept()
 {
-    QMultiHash<ChannelFlag, int> hash;
-    emit accepted(hash);
+    emit accepted(m_model->hashChecked());
     QDialog::accept();
 }
 
