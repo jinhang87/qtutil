@@ -13,8 +13,16 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        widget.cpp
+        widget.cpp \
+    channelboxmodel.cpp \
+    channelboxdialog.cpp \
+    channelboxwidget.cpp
 
-HEADERS  += widget.h
+HEADERS  += widget.h \
+    channelboxmodel.h \
+    channelboxdialog.h \
+    channelboxwidget.h
 
-FORMS    += widget.ui
+FORMS    += widget.ui \
+    channelboxdialog.ui \
+    channelboxwidget.ui
