@@ -6,6 +6,8 @@
 #include <QHash>
 #include <QSharedPointer>
 #include <QGridLayout>
+#include <QLabel>
+#include <QModelIndex>
 
 namespace Ui {
 class ChannelBoxWidget;
@@ -36,6 +38,7 @@ private:
     Ui::ChannelBoxWidget *ui;
     QButtonGroup* m_ChannelButtonGroup = nullptr;
     QHash<ChannelButtonRole, QSharedPointer<ChannelBoxModel>> m_hashModel;
+    QHash<QLabel*, QModelIndex> m_hashWatchedLabels;
 };
 
 #endif // CHANNELBOXWIDGET_H

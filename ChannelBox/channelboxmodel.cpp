@@ -22,7 +22,7 @@ QVariant ChannelBoxModel::data(const QModelIndex &index, int role) const
     case Qt::DisplayRole:
         return QString::number(index.row()+1);
     case Qt::CheckStateRole:
-        return false;
+        return (m_listChecked.contains(index.row()))?true:false;
     default:
         return QVariant();
     }

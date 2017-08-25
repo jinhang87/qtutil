@@ -11,9 +11,14 @@ ChannelBoxWidget::ChannelBoxWidget(QWidget *parent) :
     ui->setupUi(this);
     m_hashModel[AnalogRole] = QSharedPointer<ChannelBoxModel>(new ChannelBoxModel());
     m_hashModel[AnalogRole]->setMaxNum(32);
+    connect(m_hashModel[AnalogRole].data(), &ChannelBoxModel::modelReset, this , [=](){
+        setupUi(AnalogRole);
+    });
     m_hashModel[NetworkRole] = QSharedPointer<ChannelBoxModel>(new ChannelBoxModel());
     m_hashModel[NetworkRole]->setMaxNum(16);
-
+    connect(m_hashModel[NetworkRole].data(), &ChannelBoxModel::modelReset, this , [=](){
+        setupUi(NetworkRole);
+    });
     m_ChannelButtonGroup = new QButtonGroup(this);
     m_ChannelButtonGroup->addButton(ui->radioButton, AnalogRole);
     m_ChannelButtonGroup->addButton(ui->radioButton_2, NetworkRole);
@@ -30,23 +35,36 @@ ChannelBoxWidget::~ChannelBoxWidget()
 
 bool ChannelBoxWidget::eventFilter(QObject *watched, QEvent *event)
 {
-#if 0
-    int id = -1;
-    if(-1 != (id = dayGroup->id(qobject_cast<DayTrack*>(watched))) ){
+    QLabel* label = qobject_cast<QLabel*>(watched);
+    if(label && m_hashWatchedLabels.contains(qobject_cast<QLabel*>(watched))){
         if(event->type() == QEvent::MouseButtonRelease){
-            if(!hashChecked[id]){
-                dayGroup->copyto(sourceId, id);
-                hashChecked[id] = true;
-                emit checkedIdChanged(id, true);
-            }else{
-                dayGroup->dayTrack(id)->clearSpliters();
-                hashChecked[id] = false;
-                emit checkedIdChanged(id, false);
+            QModelIndex index = m_hashWatchedLabels[label];
+            if(m_ChannelButtonGroup->checkedId() != -1){
+                ChannelButtonRole role = (ChannelButtonRole)m_ChannelButtonGroup->checkedId();
+                qDebug() << "eventFilter role " << role << index;
+                QSharedPointer<ChannelBoxModel> model = m_hashModel[role];
+                model->setData(index, true, Qt::CheckStateRole);
+                setupUi(role);
+                return true;
             }
-            return true;
         }
     }
-#endif
+
+    //    if(-1 != (id = dayGroup->id(qobject_cast<QLabel*>(watched))) ){
+    //        if(event->type() == QEvent::MouseButtonRelease){
+    //            if(!hashChecked[id]){
+    //                dayGroup->copyto(sourceId, id);
+    //                hashChecked[id] = true;
+    //                emit checkedIdChanged(id, true);
+    //            }else{
+    //                dayGroup->dayTrack(id)->clearSpliters();
+    //                hashChecked[id] = false;
+    //                emit checkedIdChanged(id, false);
+    //            }
+    //            return true;
+    //        }
+    //    }
+
     return QWidget::eventFilter(watched, event);
 }
 
@@ -57,8 +75,8 @@ void ChannelBoxWidget::paintEvent(QPaintEvent *e)
 
 void ChannelBoxWidget::setupUi(ChannelButtonRole role)
 {
-    QSharedPointer<ChannelBoxModel> m_model = m_hashModel[role];
-    if(!m_model)
+    QSharedPointer<ChannelBoxModel> model = m_hashModel[role];
+    if(!model)
         return;
     qDebug() << "setupUi" << role;
 
@@ -70,15 +88,16 @@ void ChannelBoxWidget::setupUi(ChannelButtonRole role)
     }
 
     int row = 0;
-    for(row = 0; row < m_model->rowCount(); row++){
-        QModelIndex index = m_model->index(row);
-        QString text = m_model->data(index, Qt::DisplayRole).toString();
-        bool isChecked = m_model->data(index, Qt::CheckStateRole).toBool();
+    for(row = 0; row < model->rowCount(); row++){
+        QModelIndex index = model->index(row);
+        QString text = model->data(index, Qt::DisplayRole).toString();
+        bool isChecked = model->data(index, Qt::CheckStateRole).toBool();
         QLabel *label = new QLabel(text, this);
         if(isChecked){
             label->setStyleSheet(QString("QLabel{ background: red }"));
         }
         label->installEventFilter(this);
+        m_hashWatchedLabels[label] = index;
         layout->addWidget(label, row/LAEBL_PER_LINE, row%LAEBL_PER_LINE);
     }
 
