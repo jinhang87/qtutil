@@ -2,36 +2,40 @@
 #define CHANNELBOXWIDGET_H
 
 #include <QWidget>
-#include <QAbstractItemModel>
 #include <QButtonGroup>
+#include <QHash>
+#include <QSharedPointer>
+#include <QGridLayout>
 
 namespace Ui {
 class ChannelBoxWidget;
 }
 
-enum ChannelFlag : int;
+class ChannelBoxModel;
 class ChannelBoxWidget : public QWidget
 {
     Q_OBJECT
 
 public:
     const int LAEBL_PER_LINE = 9;
+    enum Mode { SingleSelectedMode, MultiSelectedMode};
+    Q_ENUM(Mode)
+    enum ChannelButtonRole { AnalogRole, NetworkRole};
+    Q_ENUM(ChannelButtonRole)
+
 public:
     explicit ChannelBoxWidget(QWidget *parent = 0);
     ~ChannelBoxWidget();
-
-    QAbstractItemModel *model() const;
-    void setModel(QAbstractItemModel *model);
 
 protected:
     bool eventFilter(QObject *watched, QEvent *event);
     virtual void paintEvent(QPaintEvent *e);
 
 private:
-    void setupUi();
+    void setupUi(ChannelButtonRole role);
     Ui::ChannelBoxWidget *ui;
-    QAbstractItemModel *m_model = nullptr;
-    QButtonGroup* m_btnGroupChannelFlag = nullptr;
+    QButtonGroup* m_ChannelButtonGroup = nullptr;
+    QHash<ChannelButtonRole, QSharedPointer<ChannelBoxModel>> m_hashModel;
 };
 
 #endif // CHANNELBOXWIDGET_H

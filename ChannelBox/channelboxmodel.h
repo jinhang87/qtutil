@@ -1,10 +1,9 @@
 #ifndef CHANNELBOXMODEL_H
 #define CHANNELBOXMODEL_H
 
-#include "channelboxdialog.h"
-#include <QAbstractTableModel>
+#include <QAbstractListModel>
 
-class ChannelBoxModel : public QAbstractTableModel
+class ChannelBoxModel : public QAbstractListModel
 {
     Q_OBJECT
 
@@ -13,24 +12,17 @@ public:
 
     // Basic functionality:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
-    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
-    QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
 
-    int maxAnalogChannelNum() const;
-    void setMaxAnalogChannelNum(int maxAnalogChannelNum);
+    QList<int> hashChecked() const;
 
-    int maxNetworkChannelNum() const;
-    void setMaxNetworkChannelNum(int maxNetworkChannelNum);
-
-    QMultiHash<ChannelBoxDialog::ChannelFlag, int> hashChecked() const;
+    int maxNum() const;
+    void setMaxNum(int maxNum);
 
 private:
-    int m_maxAnalogChannelNum = 0;
-    int m_maxNetworkChannelNum = 0;
-    QMultiHash<ChannelBoxDialog::ChannelFlag, int> m_hashChecked;
-
+    int m_maxNum = 0;
+    QList<int> m_listChecked;
 };
 
 #endif // CHANNELBOXMODEL_H

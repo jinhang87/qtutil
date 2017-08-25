@@ -1,6 +1,6 @@
 #include "channelboxwidget.h"
 #include "ui_channelboxwidget.h"
-#include "channelboxdialog.h"
+#include "channelboxmodel.h"
 #include <QDebug>
 #include <QPaintEvent>
 
@@ -9,26 +9,23 @@ ChannelBoxWidget::ChannelBoxWidget(QWidget *parent) :
     ui(new Ui::ChannelBoxWidget)
 {
     ui->setupUi(this);
-    m_btnGroupChannelFlag = new QButtonGroup(this);
-    m_btnGroupChannelFlag->addButton(ui->radioButton, ChannelBoxDialog::Analog);
-    m_btnGroupChannelFlag->addButton(ui->radioButton_2, ChannelBoxDialog::Network);
-    setupUi();
+    m_hashModel[AnalogRole] = QSharedPointer<ChannelBoxModel>(new ChannelBoxModel());
+    m_hashModel[AnalogRole]->setMaxNum(32);
+    m_hashModel[NetworkRole] = QSharedPointer<ChannelBoxModel>(new ChannelBoxModel());
+    m_hashModel[NetworkRole]->setMaxNum(16);
+
+    m_ChannelButtonGroup = new QButtonGroup(this);
+    m_ChannelButtonGroup->addButton(ui->radioButton, AnalogRole);
+    m_ChannelButtonGroup->addButton(ui->radioButton_2, NetworkRole);
+    connect(m_ChannelButtonGroup, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked), this, [=](int id){
+        setupUi((ChannelButtonRole)id);
+    });
+    setupUi(AnalogRole);
 }
 
 ChannelBoxWidget::~ChannelBoxWidget()
 {
     delete ui;
-}
-
-QAbstractItemModel *ChannelBoxWidget::model() const
-{
-    return m_model;
-}
-
-void ChannelBoxWidget::setModel(QAbstractItemModel *model)
-{
-    m_model = model;
-    setupUi();
 }
 
 bool ChannelBoxWidget::eventFilter(QObject *watched, QEvent *event)
@@ -58,20 +55,23 @@ void ChannelBoxWidget::paintEvent(QPaintEvent *e)
     QWidget::paintEvent(e);
 }
 
-void ChannelBoxWidget::setupUi()
+void ChannelBoxWidget::setupUi(ChannelButtonRole role)
 {
+    QSharedPointer<ChannelBoxModel> m_model = m_hashModel[role];
     if(!m_model)
         return;
+    qDebug() << "setupUi" << role;
 
-    QLayoutItem *sizeBtn = 0;
-    while((sizeBtn = ui->gridLayout->takeAt(0)) != 0){
-        ui->gridLayout->widget()->setParent(0);
-        delete sizeBtn;
+    QGridLayout *layout = ui->gridLayout;
+    QLayoutItem *child = 0;
+    while((child = layout->takeAt(0)) != 0){
+        child->widget()->setParent(0);
+        delete child;
     }
 
-    int row = 0, column = 0, count = 0;
-    for(column = 0; column < m_model->columnCount(); column++){
-        QModelIndex index = m_model->index(row, column);
+    int row = 0;
+    for(row = 0; row < m_model->rowCount(); row++){
+        QModelIndex index = m_model->index(row);
         QString text = m_model->data(index, Qt::DisplayRole).toString();
         bool isChecked = m_model->data(index, Qt::CheckStateRole).toBool();
         QLabel *label = new QLabel(text, this);
@@ -79,6 +79,7 @@ void ChannelBoxWidget::setupUi()
             label->setStyleSheet(QString("QLabel{ background: red }"));
         }
         label->installEventFilter(this);
-        ui->gridLayout->addWidget(label, column/LAEBL_PER_LINE, column%LAEBL_PER_LINE);
+        layout->addWidget(label, row/LAEBL_PER_LINE, row%LAEBL_PER_LINE);
     }
+
 }

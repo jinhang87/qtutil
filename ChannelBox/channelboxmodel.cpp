@@ -3,32 +3,14 @@
 #include <QDebug>
 
 ChannelBoxModel::ChannelBoxModel(QObject *parent)
-    : QAbstractTableModel(parent)
+    : QAbstractListModel(parent)
 {
 }
 
 int ChannelBoxModel::rowCount(const QModelIndex &parent) const
 {
-    //if (!parent.isValid())
-        //return 0;
     Q_UNUSED(parent);
-    int rowcount = 0;
-    if(m_maxAnalogChannelNum>0){
-        rowcount++;
-    }
-    if(m_maxNetworkChannelNum>0){
-        rowcount++;
-    }
-    qDebug() <<"rowcount"<<rowcount;
-    return rowcount;
-}
-
-int ChannelBoxModel::columnCount(const QModelIndex &parent) const
-{
-    //if (!parent.isValid())
-        //return 0;
-    Q_UNUSED(parent);
-    return qMax(m_maxAnalogChannelNum, m_maxNetworkChannelNum);
+    return m_maxNum;
 }
 
 QVariant ChannelBoxModel::data(const QModelIndex &index, int role) const
@@ -38,7 +20,7 @@ QVariant ChannelBoxModel::data(const QModelIndex &index, int role) const
 
     switch(role){
     case Qt::DisplayRole:
-        return QString::number(index.column());
+        return QString::number(index.row()+1);
     case Qt::CheckStateRole:
         return false;
     default:
@@ -57,18 +39,10 @@ bool ChannelBoxModel::setData(const QModelIndex &index, const QVariant &value, i
     case Qt::DisplayRole:
         return false;
     case Qt::CheckStateRole:
-        ChannelBoxDialog::ChannelFlag flag;
-        if(m_maxAnalogChannelNum==0){
-            flag = ChannelBoxDialog::Network;
-        }else if(m_maxNetworkChannelNum ==0){
-            flag = ChannelBoxDialog::Analog;
-        }else{
-            flag = (index.row() == 0) ? ChannelBoxDialog::Analog : ChannelBoxDialog::Network;
-        }
         if(value.toBool()){
-            m_hashChecked.insert(flag, index.column());
+            m_listChecked.append(index.row());
         }else{
-            m_hashChecked.remove(flag, index.column());
+            m_listChecked.removeAll(index.row());
         }
         return true;
     default:
@@ -78,37 +52,21 @@ bool ChannelBoxModel::setData(const QModelIndex &index, const QVariant &value, i
     return false;
 }
 
-QModelIndex ChannelBoxModel::index(int row, int column, const QModelIndex &parent) const
+QList<int> ChannelBoxModel::hashChecked() const
 {
-    return QAbstractTableModel::index(row, column, parent);
+    return m_listChecked;
 }
 
-int ChannelBoxModel::maxAnalogChannelNum() const
+int ChannelBoxModel::maxNum() const
 {
-    return m_maxAnalogChannelNum;
+    return m_maxNum;
 }
 
-void ChannelBoxModel::setMaxAnalogChannelNum(int maxAnalogChannelNum)
+void ChannelBoxModel::setMaxNum(int maxNum)
 {
     beginResetModel();
-    m_maxAnalogChannelNum = maxAnalogChannelNum;
+    m_maxNum = maxNum;
+    m_listChecked.clear();
     endResetModel();
-}
-
-int ChannelBoxModel::maxNetworkChannelNum() const
-{
-    return m_maxNetworkChannelNum;
-}
-
-void ChannelBoxModel::setMaxNetworkChannelNum(int maxNetworkChannelNum)
-{
-    beginResetModel();
-    m_maxNetworkChannelNum = maxNetworkChannelNum;
-    endResetModel();
-}
-
-QMultiHash<ChannelBoxDialog::ChannelFlag, int> ChannelBoxModel::hashChecked() const
-{
-    return m_hashChecked;
 }
 

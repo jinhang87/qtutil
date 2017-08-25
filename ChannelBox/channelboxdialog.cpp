@@ -7,10 +7,6 @@ ChannelBoxDialog::ChannelBoxDialog(QWidget *parent) :
     ui(new Ui::ChannelBoxDialog)
 {
     ui->setupUi(this);
-    m_model.reset(new ChannelBoxModel());
-    m_model->setMaxAnalogChannelNum(32);
-    m_model->setMaxNetworkChannelNum(32);
-    ui->widget->setModel(m_model.data());
 }
 
 ChannelBoxDialog::~ChannelBoxDialog()
@@ -20,16 +16,7 @@ ChannelBoxDialog::~ChannelBoxDialog()
 
 void ChannelBoxDialog::accept()
 {
-    emit accepted(m_model->hashChecked());
+    //emit accepted(m_model->hashChecked());
     QDialog::accept();
 }
 
-ChannelBoxDialog::Mode ChannelBoxDialog::mode() const
-{
-    return m_mode;
-}
-
-void ChannelBoxDialog::setMode(const Mode &mode)
-{
-    m_mode = mode;
-}
