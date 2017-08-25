@@ -8,7 +8,7 @@ class ChannelBoxModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-    explicit ChannelBoxModel(QObject *parent = 0);
+    explicit ChannelBoxModel(QObject *parent = 0, int maxNum = 0);
 
     // Basic functionality:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
@@ -16,7 +16,7 @@ public:
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
 
     QList<int> hashChecked() const;
-
+    void clearHashChecked();
     int maxNum() const;
     void setMaxNum(int maxNum);
 

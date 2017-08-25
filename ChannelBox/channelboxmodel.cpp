@@ -2,8 +2,8 @@
 #include "channelboxdialog.h"
 #include <QDebug>
 
-ChannelBoxModel::ChannelBoxModel(QObject *parent)
-    : QAbstractListModel(parent)
+ChannelBoxModel::ChannelBoxModel(QObject *parent, int maxNum)
+    : QAbstractListModel(parent), m_maxNum(maxNum)
 {
 }
 
@@ -55,6 +55,11 @@ bool ChannelBoxModel::setData(const QModelIndex &index, const QVariant &value, i
 QList<int> ChannelBoxModel::hashChecked() const
 {
     return m_listChecked;
+}
+
+void ChannelBoxModel::clearHashChecked()
+{
+    m_listChecked.clear();
 }
 
 int ChannelBoxModel::maxNum() const

@@ -20,8 +20,8 @@ class ChannelBoxWidget : public QWidget
 
 public:
     const int LAEBL_PER_LINE = 9;
-    enum Mode { SingleSelectedMode, MultiSelectedMode};
-    Q_ENUM(Mode)
+    enum SelectedMode { SingleSelectedMode, MultiSelectedMode};
+    Q_ENUM(SelectedMode)
     enum ChannelButtonRole { AnalogRole, NetworkRole};
     Q_ENUM(ChannelButtonRole)
 
@@ -29,16 +29,21 @@ public:
     explicit ChannelBoxWidget(QWidget *parent = 0);
     ~ChannelBoxWidget();
 
+    SelectedMode selectedMode() const;
+    void setSelectedMode(const SelectedMode &selectedMode);
+
 protected:
     bool eventFilter(QObject *watched, QEvent *event);
     virtual void paintEvent(QPaintEvent *e);
 
 private:
     void setupUi(ChannelButtonRole role);
+    void clearChecked();
     Ui::ChannelBoxWidget *ui;
     QButtonGroup* m_ChannelButtonGroup = nullptr;
     QHash<ChannelButtonRole, QSharedPointer<ChannelBoxModel>> m_hashModel;
     QHash<QLabel*, QModelIndex> m_hashWatchedLabels;
+    SelectedMode m_selectedMode = SingleSelectedMode;
 };
 
 #endif // CHANNELBOXWIDGET_H

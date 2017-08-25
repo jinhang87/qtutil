@@ -43,27 +43,14 @@ bool ChannelBoxWidget::eventFilter(QObject *watched, QEvent *event)
                 ChannelButtonRole role = (ChannelButtonRole)m_ChannelButtonGroup->checkedId();
                 qDebug() << "eventFilter role " << role << index;
                 QSharedPointer<ChannelBoxModel> model = m_hashModel[role];
+                if(m_selectedMode == SingleSelectedMode)
+                    clearChecked();
                 model->setData(index, true, Qt::CheckStateRole);
                 setupUi(role);
                 return true;
             }
         }
     }
-
-    //    if(-1 != (id = dayGroup->id(qobject_cast<QLabel*>(watched))) ){
-    //        if(event->type() == QEvent::MouseButtonRelease){
-    //            if(!hashChecked[id]){
-    //                dayGroup->copyto(sourceId, id);
-    //                hashChecked[id] = true;
-    //                emit checkedIdChanged(id, true);
-    //            }else{
-    //                dayGroup->dayTrack(id)->clearSpliters();
-    //                hashChecked[id] = false;
-    //                emit checkedIdChanged(id, false);
-    //            }
-    //            return true;
-    //        }
-    //    }
 
     return QWidget::eventFilter(watched, event);
 }
@@ -102,3 +89,23 @@ void ChannelBoxWidget::setupUi(ChannelButtonRole role)
     }
 
 }
+
+void ChannelBoxWidget::clearChecked()
+{
+    QHashIterator<ChannelButtonRole, QSharedPointer<ChannelBoxModel>> it(m_hashModel);
+    while (it.hasNext()) {
+        it.next();
+        it.value()->clearHashChecked();
+    }
+}
+
+ChannelBoxWidget::SelectedMode ChannelBoxWidget::selectedMode() const
+{
+    return m_selectedMode;
+}
+
+void ChannelBoxWidget::setSelectedMode(const SelectedMode &selectedMode)
+{
+    m_selectedMode = selectedMode;
+}
+
