@@ -109,3 +109,19 @@ void ChannelBoxWidget::setSelectedMode(const SelectedMode &selectedMode)
     m_selectedMode = selectedMode;
 }
 
+QMultiHash<ChannelBoxWidget::ChannelButtonRole, int> ChannelBoxWidget::checkedRoles()
+{
+    QMultiHash<ChannelBoxWidget::ChannelButtonRole, int> hash;
+    QHashIterator<ChannelBoxWidget::ChannelButtonRole, QSharedPointer<ChannelBoxModel>> it(m_hashModel);
+    while (it.hasNext()) {
+        it.next();
+        ChannelBoxWidget::ChannelButtonRole role = it.key();
+        QList<int> list = it.value()->hashChecked();
+        QListIterator<int> itlist(list);
+        while (itlist.hasNext()) {
+            hash.insert(role, itlist.next());
+        }
+    }
+    return hash;
+}
+

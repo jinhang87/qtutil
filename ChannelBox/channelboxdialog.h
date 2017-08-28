@@ -17,9 +17,10 @@ class ChannelBoxDialog : public QDialog
 public:
     explicit ChannelBoxDialog(QWidget *parent = 0);
     ~ChannelBoxDialog();
+    void setSelectedMode(const ChannelBoxWidget::SelectedMode &selectedMode);
 
 signals:
-    //void accepted(const QMultiHash<ChannelFlag, int> &hash);
+    void accepted(const QMultiHash<ChannelBoxWidget::ChannelButtonRole, int> &hash);
 
 private:
     void accept() override;

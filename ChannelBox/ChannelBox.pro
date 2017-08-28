@@ -16,13 +16,16 @@ SOURCES += main.cpp\
         widget.cpp \
     channelboxmodel.cpp \
     channelboxdialog.cpp \
-    channelboxwidget.cpp
+    channelboxwidget.cpp \
+    mainwindow.cpp
 
 HEADERS  += widget.h \
     channelboxmodel.h \
     channelboxdialog.h \
-    channelboxwidget.h
+    channelboxwidget.h \
+    mainwindow.h
 
 FORMS    += widget.ui \
     channelboxdialog.ui \
-    channelboxwidget.ui
+    channelboxwidget.ui \
+    mainwindow.ui

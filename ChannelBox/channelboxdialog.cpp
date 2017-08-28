@@ -1,6 +1,7 @@
 #include "channelboxdialog.h"
 #include "ui_channelboxdialog.h"
 #include "channelboxmodel.h"
+#include <QDebug>
 
 ChannelBoxDialog::ChannelBoxDialog(QWidget *parent) :
     QDialog(parent),
@@ -14,9 +15,14 @@ ChannelBoxDialog::~ChannelBoxDialog()
     delete ui;
 }
 
+void ChannelBoxDialog::setSelectedMode(const ChannelBoxWidget::SelectedMode &selectedMode)
+{
+    ui->widget->setSelectedMode(selectedMode);
+}
+
 void ChannelBoxDialog::accept()
 {
-    //emit accepted(m_model->hashChecked());
+    emit accepted(ui->widget->checkedRoles());
     QDialog::accept();
 }
 

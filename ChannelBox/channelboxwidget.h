@@ -32,6 +32,8 @@ public:
     SelectedMode selectedMode() const;
     void setSelectedMode(const SelectedMode &selectedMode);
 
+    QMultiHash<ChannelBoxWidget::ChannelButtonRole, int> checkedRoles();
+
 protected:
     bool eventFilter(QObject *watched, QEvent *event);
     virtual void paintEvent(QPaintEvent *e);
