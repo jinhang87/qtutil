@@ -6,7 +6,7 @@ WidgetA::WidgetA(QWidget *parent) :
     ui(new Ui::WidgetA)
 {
     ui->setupUi(this);
-    setWindowOpacity(0.7);
+    setWindowOpacity(0.2);
 }
 
 WidgetA::~WidgetA()

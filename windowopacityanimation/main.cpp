@@ -1,6 +1,9 @@
 #include "widget.h"
 #include "widgeta.h"
 #include "widgetb.h"
+#include "widgetc.h"
+#include "widgetd.h"
+#include "widgetqss.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
@@ -11,14 +14,31 @@ int main(int argc, char *argv[])
 //    Widget w;
 //    w.show();
 
-    //窗体透明，窗体的控件透明，windows ok
-    WidgetA w;
-    w.show();
+//    //窗体透明，窗体的控件透明，windows ok
+//    //embeded linux 正常
+//    //windows 正常
+//    WidgetA w;
+//    w.show();
 
 //    //窗体透明，窗体的控件不透明，windows ok
 //    WidgetB w;
 //    w.show();
 
+//    //窗体不透明，窗体的局部区域透明，窗体上的控件不透明
+//    //embeded linux 正常
+//    //windows 局部区域变黑，控件显示不了
+//    WidgetC w;
+//    w.show();
+
+//    //窗体透明，控件不透明
+//    //embeded linux 正常
+//    //windows 背景变黑，控件显示不了
+//    WidgetD w;
+//    w.show();
+
+    //控件透明颜色属性
+    WidgetQss w;
+    w.show();
 
     return a.exec();
 }
