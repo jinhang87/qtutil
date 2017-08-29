@@ -27,14 +27,23 @@ SOURCES += \
         main.cpp \
         widget.cpp \
     widgeta.cpp \
-    widgetb.cpp
+    widgetb.cpp \
+    widgetc.cpp \
+    widgetqss.cpp \
+    widgetd.cpp
 
 HEADERS += \
         widget.h \
     widgeta.h \
-    widgetb.h
+    widgetb.h \
+    widgetc.h \
+    widgetqss.h \
+    widgetd.h
 
 FORMS += \
         widget.ui \
     widgeta.ui \
-    widgetb.ui
+    widgetb.ui \
+    widgetc.ui \
+    widgetqss.ui \
+    widgetd.ui
