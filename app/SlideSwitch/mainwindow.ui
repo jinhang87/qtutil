@@ -24,6 +24,16 @@
      </rect>
     </property>
    </widget>
+   <widget class="SlideSwitch" name="widget_2" native="true">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>260</y>
+      <width>120</width>
+      <height>80</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

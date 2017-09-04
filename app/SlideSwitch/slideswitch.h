@@ -53,7 +53,7 @@ private:
     // 外边距
     qint16 m_nMargin = 3;
     // 滑动速度（1~10）
-    int m_speed = 1;
+    int m_speed = 5;
     // 定时器
     QTimer m_timer;
 };
