@@ -5,9 +5,9 @@
 
 TimeTip::TimeTip(QWidget *parent) : QWidget(parent)
 {
-    left = new SliderButton(parent);
+    left = new SliderButton(Qt::LeftButton, parent);
     connect(left, &SliderButton::posChanged, this, &TimeTip::onLeftPosChanged);
-    right = new SliderButton(parent);
+    right = new SliderButton(Qt::RightButton, parent);
     connect(right, &SliderButton::posChanged, this, &TimeTip::onRightPosChanged);
     detail = new QPushButton(parent);
     detail->resize(200,20);

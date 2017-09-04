@@ -8,7 +8,7 @@ class SliderButton : public QPushButton
 {
     Q_OBJECT
 public:
-    explicit SliderButton(QWidget *parent = 0);
+    explicit SliderButton(Qt::MouseButton enumButton = Qt::LeftButton, QWidget *parent = 0);
 protected:
     virtual void mousePressEvent(QMouseEvent * event);
     virtual void mouseMoveEvent(QMouseEvent * event);
@@ -22,6 +22,7 @@ public slots:
 
 private:
     int pressedPos;
+    Qt::MouseButton m_enumButton = Qt::LeftButton;
 };
 
 #endif // SLIDERBUTTON_H

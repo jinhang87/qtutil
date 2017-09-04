@@ -3,7 +3,7 @@
 #include <QPaintEvent>
 #include <QDebug>
 
-SliderButton::SliderButton(QWidget *parent) : QPushButton(parent)
+SliderButton::SliderButton(Qt::MouseButton enumButton, QWidget *parent) : QPushButton(parent), m_enumButton(enumButton)
 {
     resize(QSize(12,12));
 }
@@ -27,11 +27,19 @@ void SliderButton::paintEvent(QPaintEvent *e)
     painter.setViewport(0,0,width(), height());
 
     QPainterPath path;
-    path.moveTo(0, 6);
-    path.lineTo(0, 12);
-    path.lineTo(12, 12);
-    path.lineTo(12, 0);
-    path.lineTo(0, 6);
+    if(m_enumButton == Qt::LeftButton){
+        path.moveTo(0, 6);
+        path.lineTo(0, 12);
+        path.lineTo(12, 12);
+        path.lineTo(12, 0);
+        path.lineTo(0, 6);
+    }else{
+        path.moveTo(0, 0);
+        path.lineTo(0, 12);
+        path.lineTo(12, 12);
+        path.lineTo(12, 6);
+        path.lineTo(0, 0);
+    }
 
     //设置无画笔，避免边框出现一条黑线
     painter.setPen(Qt::NoPen);
@@ -39,7 +47,8 @@ void SliderButton::paintEvent(QPaintEvent *e)
     painter.setBrush(QBrush(QColor(36,169,225), Qt::SolidPattern));
     //绘制背景
     painter.drawPath(path);
-    e->accept();//不再向父类传递消息
+    //不再向父类传递消息
+    e->accept();
 }
 
 QSize SliderButton::sizeHint() const
