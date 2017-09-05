@@ -2,8 +2,11 @@
       border-top: 2px solid #C2C7CB;
   }
 
+
+
   QTabWidget::tab-bar {
-      left: 5px; /* move to the right by 5px */
+      /*left: 15px;*/ /* move to the right by 5px */
+      alignment: center;
   }
 
   /* Style the tab using the tab sub-control. Note that
