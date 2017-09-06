@@ -56,16 +56,16 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_2">
+           <widget class="QLabel" name="capacity1">
             <property name="text">
              <string>TextLabel</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="smart1">
             <property name="text">
-             <string>PushButton</string>
+             <string>smart1</string>
             </property>
            </widget>
           </item>
@@ -111,16 +111,16 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_4">
+           <widget class="QLabel" name="capacity2">
             <property name="text">
              <string>TextLabel</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_2">
+           <widget class="QPushButton" name="smart2">
             <property name="text">
-             <string>PushButton</string>
+             <string>smart2</string>
             </property>
            </widget>
           </item>
@@ -166,16 +166,16 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_6">
+           <widget class="QLabel" name="capacity3">
             <property name="text">
              <string>TextLabel</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_3">
+           <widget class="QPushButton" name="smart3">
             <property name="text">
-             <string>PushButton</string>
+             <string>smart3</string>
             </property>
            </widget>
           </item>
@@ -221,16 +221,16 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_8">
+           <widget class="QLabel" name="capacity4">
             <property name="text">
              <string>TextLabel</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_4">
+           <widget class="QPushButton" name="smart4">
             <property name="text">
-             <string>PushButton</string>
+             <string>smart4</string>
             </property>
            </widget>
           </item>

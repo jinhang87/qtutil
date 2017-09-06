@@ -25,10 +25,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    storageoverviewwidget.cpp
+    storageoverviewwidget.cpp \
+    storagesmartdialog.cpp \
+    storagemodel.cpp
 
 HEADERS  += mainwindow.h \
-    storageoverviewwidget.h
+    storageoverviewwidget.h \
+    storagesmartdialog.h \
+    storagemodel.h
 
 FORMS    += mainwindow.ui \
-    storageoverviewwidget.ui
+    storageoverviewwidget.ui \
+    storagesmartdialog.ui
