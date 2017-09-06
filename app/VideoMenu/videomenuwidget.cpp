@@ -34,12 +34,13 @@ void VideoMenuWidget::machineReset()
     s3->assignProperty(ui->frame, "pos", QPoint(0,10));
     s3->assignProperty(ui->frame_2, "pos", QPoint(this->width()/2, this->height()-ui->frame_2->height()));
     s3->assignProperty(ui->frame_3, "pos", QPoint(this->width()-ui->frame_3->width(), 10));
+
     QPropertyAnimation *animation = new QPropertyAnimation(ui->frame, "pos");
     QPropertyAnimation *animation2 = new QPropertyAnimation(ui->frame_2, "pos");
     QPropertyAnimation *animation3 = new QPropertyAnimation(ui->frame_3, "pos");
-    animation->setDuration(1000);
-    animation2->setDuration(1000);
-    animation3->setDuration(1000);
+    animation->setDuration(500);
+    animation2->setDuration(500);
+    animation3->setDuration(500);
 
     QSignalTransition *moreTransition = s2->addTransition(ui->pushButtonMore, SIGNAL(clicked()), s3);
     moreTransition->addAnimation(animation);
