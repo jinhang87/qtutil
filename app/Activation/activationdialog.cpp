@@ -44,3 +44,12 @@ void ActivationDialog::onLineEditTextChanged(const QString &text)
         break;
     }
 }
+
+void ActivationDialog::on_lineEdit_3_textChanged(const QString &arg1)
+{
+    if(0 != arg1.compare(ui->lineEdit_2->text())){
+        ui->label->setText(LEBEL_NOT_SAME_TEXT);
+    }else{
+        ui->label->setText(LEBEL_DEFAULT_TEXT);
+    }
+}
