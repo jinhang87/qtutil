@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-#define TEST 5
+#define TEST 2
 
 #if (TEST==1)
     //指定某个控件透明，windows ok
