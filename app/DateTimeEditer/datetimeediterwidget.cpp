@@ -59,6 +59,9 @@ void DateTimeEditerWidget::setupUi()
         if(isChecked){
             label->setStyleSheet(QString("QLabel{ background: red }"));
         }
+        label->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
+        label->setMinimumSize(80,80);
+        label->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         label->installEventFilter(this);
         m_hashWatchedLabels[label] = index;
         layout->addWidget(label, row/LAEBL_PER_LINE, row%LAEBL_PER_LINE);
