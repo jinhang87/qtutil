@@ -16,6 +16,7 @@ public:
     ~ActivationDialog();
 
 private:
+    void onLineEditTextChanged(const QString &text);
     Ui::ActivationDialog *ui;
 };
 

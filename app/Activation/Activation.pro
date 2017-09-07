@@ -25,10 +25,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    activationdialog.cpp
+    activationdialog.cpp \
+    passwordvalidator.cpp
 
 HEADERS  += mainwindow.h \
-    activationdialog.h
+    activationdialog.h \
+    passwordvalidator.h
 
 FORMS    += mainwindow.ui \
     activationdialog.ui
