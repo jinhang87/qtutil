@@ -16,3 +16,9 @@ MessageBox::~MessageBox()
 {
     delete ui;
 }
+
+int MessageBox::information(QWidget *parent, const QString &text, QMessageBox::StandardButtons buttons, QMessageBox::StandardButton defaultButton)
+{
+    MessageBox messageBox(MessageBox::Information, text, QMessageBox::NoButton, parent);
+    return messageBox.exec();
+}

@@ -18,6 +18,9 @@ public:
     Q_ENUM(Icon)
     explicit MessageBox(Icon icon, const QString &text, QMessageBox::StandardButtons buttons = QMessageBox::NoButton, QWidget *parent = 0);
     ~MessageBox();
+    static int information(QWidget *parent, const QString& text,
+                           QMessageBox::StandardButtons buttons = QMessageBox::Ok,
+                           QMessageBox::StandardButton defaultButton = QMessageBox::NoButton);
 
 private:
     Ui::MessageBox *ui;

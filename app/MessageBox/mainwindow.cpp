@@ -16,7 +16,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    MessageBox m(MessageBox::NoIcon, "sample", QMessageBox::Ok | QMessageBox::Cancel);
-    m.show();
-    m.exec();
+#if 0
+//    MessageBox m(MessageBox::NoIcon, "sample", QMessageBox::Ok | QMessageBox::Cancel);
+//    m.show();
+//    m.exec();
+#else
+    MessageBox::information(NULL, "Content", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+#endif
 }
