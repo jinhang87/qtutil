@@ -25,13 +25,20 @@ void ActivationDialog::onLineEditTextChanged(const QString &text)
     PasswordValidator::Level lv = validator.level();
     switch(lv){
     case PasswordValidator::InValid:
+    case PasswordValidator::Low:
+        ui->frame_high->setStyleSheet("QFrame { border: 1px solid black ; background: #b6070a }");//red
+        ui->frame_medium->setStyleSheet("QFrame {  }");
+        ui->frame_low->setStyleSheet("QFrame {  }");
         break;
     case PasswordValidator::High:
-
+        ui->frame_low->setStyleSheet("QFrame { border: 1px solid black ; background: #00bc52 }");//green
+        ui->frame_medium->setStyleSheet("QFrame {  }");
+        ui->frame_high->setStyleSheet("QFrame {  }");
         break;
     case PasswordValidator::Medium:
-        break;
-    case PasswordValidator::Low:
+        ui->frame_medium->setStyleSheet("QFrame { border: 1px solid black ; background: #e28a00 }");//yellow
+        ui->frame_low->setStyleSheet("QFrame {  }");
+        ui->frame_high->setStyleSheet("QFrame {  }");
         break;
     default:
         break;
