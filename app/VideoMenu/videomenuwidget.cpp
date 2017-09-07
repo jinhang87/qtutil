@@ -34,6 +34,9 @@ void VideoMenuWidget::machineReset()
     s3->assignProperty(ui->frame, "pos", QPoint(0,0));
     s3->assignProperty(ui->frame_2, "pos", QPoint(this->width()/2-ui->frame_2->width()/2, this->height()-ui->frame_2->height()));
     s3->assignProperty(ui->frame_3, "pos", QPoint(this->width()-ui->frame_3->width(), 10));
+    s1->assignProperty(ui->pushButtonMore, "text", QString(">"));
+    s2->assignProperty(ui->pushButtonMore, "text", QString(">"));
+    s3->assignProperty(ui->pushButtonMore, "text", QString("<"));
 
     QPropertyAnimation *animation = new QPropertyAnimation(ui->frame, "pos");
     QPropertyAnimation *animation2 = new QPropertyAnimation(ui->frame_2, "pos");

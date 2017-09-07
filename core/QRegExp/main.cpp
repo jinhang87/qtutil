@@ -43,13 +43,27 @@ void testRegexCapture2()
     }
 }
 
+void testRegexCapture3()
+{
+    QRegExp rx("[^A-Za-z0-9]+");
+    QString test("x23y54z32cx");
+
+    int pos = test.indexOf(rx);
+    qDebug() << pos;
+    if(pos >= 0){
+        qDebug() << rx.matchedLength();
+        qDebug() << rx.capturedTexts();
+    }
+}
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
-    testRegexCapture1();
-    testRegexCapture2();
+    //testRegexCapture1();
+    //testRegexCapture2();
+    testRegexCapture3();
 
     return a.exec();
 }
