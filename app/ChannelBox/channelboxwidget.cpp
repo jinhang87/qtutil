@@ -26,6 +26,8 @@ ChannelBoxWidget::ChannelBoxWidget(QWidget *parent) :
         setupUi((ChannelButtonRole)id);
     });
     setupUi(AnalogRole);
+
+    setStyleSheet("QRadioButton{ background: #191919; }");
 }
 
 ChannelBoxWidget::~ChannelBoxWidget()
@@ -83,9 +85,19 @@ void ChannelBoxWidget::setupUi(ChannelButtonRole role)
         if(isChecked){
             label->setStyleSheet(QString("QLabel{ background: red }"));
         }
+        label->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
+        label->setMinimumSize(80,80);
+        label->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         label->installEventFilter(this);
         m_hashWatchedLabels[label] = index;
         layout->addWidget(label, row/LAEBL_PER_LINE, row%LAEBL_PER_LINE);
+    }
+
+    for(row = model->rowCount(); row < LAEBL_MAX_LINE*LAEBL_PER_LINE; row++){
+        QWidget *blank = new QWidget(this);
+        blank->setMinimumSize(80,80);
+        blank->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        layout->addWidget(blank, row/LAEBL_PER_LINE, row%LAEBL_PER_LINE);
     }
 
 }

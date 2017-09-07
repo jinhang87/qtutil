@@ -20,6 +20,7 @@ class ChannelBoxWidget : public QWidget
 
 public:
     const int LAEBL_PER_LINE = 9;
+    const int LAEBL_MAX_LINE = 4;
     enum SelectedMode { SingleSelectedMode, MultiSelectedMode};
     Q_ENUM(SelectedMode)
     enum ChannelButtonRole { AnalogRole, NetworkRole};
