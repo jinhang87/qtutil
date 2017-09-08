@@ -17,10 +17,10 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked()
 {
 #if 0
-//    MessageBox m(MessageBox::NoIcon, "sample", QMessageBox::Ok | QMessageBox::Cancel);
-//    m.show();
-//    m.exec();
+    MessageBox m(MessageBox::NoIcon, "sample", QMessageBox::Ok | QMessageBox::Cancel);
+    m.show();
+    m.exec();
 #else
-    MessageBox::information(NULL, "Content", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+    MessageBox::information(this, "Content", QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
 #endif
 }

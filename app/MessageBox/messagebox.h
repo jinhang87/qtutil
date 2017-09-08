@@ -21,6 +21,13 @@ public:
     static int information(QWidget *parent, const QString& text,
                            QMessageBox::StandardButtons buttons = QMessageBox::Ok,
                            QMessageBox::StandardButton defaultButton = QMessageBox::NoButton);
+    static int question(QWidget *parent, const QString& text,
+                           QMessageBox::StandardButtons buttons = QMessageBox::Ok,
+                           QMessageBox::StandardButton defaultButton = QMessageBox::NoButton);
+    static int critical(QWidget *parent, const QString& text,
+                           QMessageBox::StandardButtons buttons = QMessageBox::Ok,
+                           QMessageBox::StandardButton defaultButton = QMessageBox::NoButton);
+
 
 private:
     Ui::MessageBox *ui;

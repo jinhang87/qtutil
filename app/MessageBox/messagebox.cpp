@@ -19,6 +19,18 @@ MessageBox::~MessageBox()
 
 int MessageBox::information(QWidget *parent, const QString &text, QMessageBox::StandardButtons buttons, QMessageBox::StandardButton defaultButton)
 {
-    MessageBox messageBox(MessageBox::Information, text, QMessageBox::NoButton, parent);
+    MessageBox messageBox(MessageBox::Information, text, buttons, parent);
+    return messageBox.exec();
+}
+
+int MessageBox::question(QWidget *parent, const QString &text, QMessageBox::StandardButtons buttons, QMessageBox::StandardButton defaultButton)
+{
+    MessageBox messageBox(MessageBox::Question, text, buttons, parent);
+    return messageBox.exec();
+}
+
+int MessageBox::critical(QWidget *parent, const QString &text, QMessageBox::StandardButtons buttons, QMessageBox::StandardButton defaultButton)
+{
+    MessageBox messageBox(MessageBox::Critical, text, buttons, parent);
     return messageBox.exec();
 }
