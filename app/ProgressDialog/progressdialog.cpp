@@ -1,5 +1,6 @@
 #include "progressdialog.h"
 #include "ui_progressdialog.h"
+#include <QDebug>
 
 ProgressDialog::ProgressDialog(const QString &cancelButtonText, int minimum, int maximum, QWidget *parent) :
     QDialog(parent),
@@ -16,14 +17,13 @@ ProgressDialog::~ProgressDialog()
 
 int ProgressDialog::value() const
 {
-    return m_value;
+    return ui->progressBar->value();
 }
 
 void ProgressDialog::setValue(int progress)
 {
-    m_value = progress;
     ui->progressBar->setValue(progress);
-
+    qDebug() << progress;
     if (isModal())
         QApplication::processEvents();
 
@@ -48,13 +48,27 @@ void ProgressDialog::setAutoClose(bool autoClose)
 
 void ProgressDialog::cancel()
 {
+    m_forceHide = true;
     reset();
+    m_forceHide = false;
+    m_wasCanceled = true;
+}
+
+void ProgressDialog::closeEvent(QCloseEvent *event)
+{
+    emit canceled();
+    QDialog::closeEvent(event);
 }
 
 void ProgressDialog::reset()
 {
-    if(m_autoClose){
+    if(m_autoClose || m_forceHide){
         hide();
     }
 }
 
+
+void ProgressDialog::on_pushButton_clicked()
+{
+    cancel();
+}

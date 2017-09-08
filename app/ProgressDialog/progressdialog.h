@@ -22,12 +22,21 @@ public:
     void setAutoClose(bool autoClose);
     void cancel();
 
+signals:
+    void canceled();
+
+protected:
+    void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
+
+private slots:
+    void on_pushButton_clicked();
+
 private:
     void reset();
     Ui::ProgressDialog *ui;
-    int m_value = 0;
     bool m_wasCanceled = false;
     bool m_autoClose = true;
+    bool m_forceHide = false;
 };
 
 #endif // PROGRESSDIALOG_H
