@@ -134,7 +134,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>PushButton</string>
+         <string>cover</string>
         </property>
        </widget>
       </item>
