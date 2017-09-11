@@ -39,13 +39,13 @@ void VideoMenuWidget::machineReset()
     QState* s3 = new QState();
 
     s1->assignProperty(ui->frame, "pos", QPoint(-ui->frame->width(),0));
-    s1->assignProperty(ui->frame_2, "pos", QPoint(this->width()/2-ui->frame_2->width()/2, this->height()));
+    s1->assignProperty(ui->frame_2, "pos", QPoint(this->width()-ui->frame_2->width()-ui->frame_3->width(), this->height()));
     s1->assignProperty(ui->frame_3, "pos", QPoint(this->width(), 10));
     s2->assignProperty(ui->frame, "pos", QPoint(-ui->frame->width()+ui->pushButtonMore->width(),0));
-    s2->assignProperty(ui->frame_2, "pos", QPoint(this->width()/2-ui->frame_2->width()/2, this->height()-ui->frame_2->height()));
+    s2->assignProperty(ui->frame_2, "pos", QPoint(this->width()-ui->frame_2->width()-ui->frame_3->width(), this->height()-ui->frame_2->height()));
     s2->assignProperty(ui->frame_3, "pos", QPoint(this->width()-ui->frame_3->width(), 10));
     s3->assignProperty(ui->frame, "pos", QPoint(0,0));
-    s3->assignProperty(ui->frame_2, "pos", QPoint(this->width()/2-ui->frame_2->width()/2, this->height()-ui->frame_2->height()));
+    s3->assignProperty(ui->frame_2, "pos", QPoint(this->width()-ui->frame_2->width()-ui->frame_3->width(), this->height()-ui->frame_2->height()));
     s3->assignProperty(ui->frame_3, "pos", QPoint(this->width()-ui->frame_3->width(), 10));
     s1->assignProperty(ui->pushButtonMore, "text", QString(">"));
     s2->assignProperty(ui->pushButtonMore, "text", QString(">"));
