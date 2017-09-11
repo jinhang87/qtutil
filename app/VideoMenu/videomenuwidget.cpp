@@ -13,7 +13,7 @@ VideoMenuWidget::VideoMenuWidget(QDialog *parent) :
     machineReset();
     setStyleSheet("QPushButton{ border: 2px solid black; background: #191919; color: #646464; font-size:24px}"
                   "QFrame#frame{ border: none; color: #646464}"
-                  "QFrame{ color: #dddddd }"
+                  "QFrame{ border: none; color: #dddddd }"
                   "QLabel{ border: 2px solid black; }"
                   );
     ui->frame_3->setStyleSheet("QPushButton{ border: 2px solid black; background: #191919; color: #dddddd; font-size:30px}");
