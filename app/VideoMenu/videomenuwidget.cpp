@@ -3,6 +3,7 @@
 #include <QPropertyAnimation>
 #include <QSignalTransition>
 #include <QEventTransition>
+#include <QPainter>
 
 VideoMenuWidget::VideoMenuWidget(QDialog *parent) :
     QDialog(parent),
@@ -16,6 +17,13 @@ VideoMenuWidget::VideoMenuWidget(QDialog *parent) :
 VideoMenuWidget::~VideoMenuWidget()
 {
     delete ui;
+}
+
+void VideoMenuWidget::paintEvent(QPaintEvent *event)
+{
+    QPainter p(this);
+    p.setCompositionMode(QPainter::CompositionMode_Clear);
+    p.fillRect(rect() ,Qt::SolidPattern);
 }
 
 void VideoMenuWidget::machineReset()

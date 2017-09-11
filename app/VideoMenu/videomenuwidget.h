@@ -16,7 +16,8 @@ class VideoMenuWidget : public QDialog
 public:
     explicit VideoMenuWidget(QDialog *parent = 0);
     ~VideoMenuWidget();
-
+protected:
+    void paintEvent(QPaintEvent *event);
 private:
     void machineReset();
     Ui::VideoMenuWidget *ui;
