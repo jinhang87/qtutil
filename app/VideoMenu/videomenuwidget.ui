@@ -102,7 +102,7 @@
          </size>
         </property>
         <property name="text">
-         <string>PushButton</string>
+         <string>quality</string>
         </property>
        </widget>
       </item>
@@ -153,7 +153,7 @@
          </size>
         </property>
         <property name="text">
-         <string>PushButton</string>
+         <string>lost</string>
         </property>
        </widget>
       </item>
@@ -191,7 +191,7 @@
          </size>
         </property>
         <property name="text">
-         <string>PushButton</string>
+         <string>motion</string>
         </property>
        </widget>
       </item>
@@ -365,8 +365,14 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>76</height>
+         </size>
+        </property>
         <property name="text">
-         <string>PushButton</string>
+         <string>Channel</string>
         </property>
        </widget>
       </item>
@@ -378,8 +384,14 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>76</height>
+         </size>
+        </property>
         <property name="text">
-         <string>PushButton</string>
+         <string>Last</string>
         </property>
        </widget>
       </item>
@@ -391,8 +403,14 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>76</height>
+         </size>
+        </property>
         <property name="text">
-         <string>PushButton</string>
+         <string>Next</string>
         </property>
        </widget>
       </item>
@@ -404,8 +422,14 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>76</height>
+         </size>
+        </property>
         <property name="text">
-         <string>PushButton</string>
+         <string>PlayBack</string>
         </property>
        </widget>
       </item>
@@ -417,8 +441,27 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>76</height>
+         </size>
+        </property>
         <property name="text">
-         <string>PushButton</string>
+         <string>Cloud</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_6">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>76</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Quick</string>
         </property>
        </widget>
       </item>
