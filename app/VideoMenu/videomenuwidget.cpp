@@ -11,11 +11,11 @@ VideoMenuWidget::VideoMenuWidget(QDialog *parent) :
 {
     ui->setupUi(this);
     machineReset();
-    setStyleSheet("QPushButton{ background: #191919; color: #646464; font-size:24px}"
-                  "QFrame#frame{ color: #646464}"
+    setStyleSheet("QPushButton{ border: 1px solid black; background: #191919; color: #646464; font-size:24px}"
+                  "QFrame#frame{ border: none; color: #646464}"
                   "QFrame{ color: #dddddd }"
                   );
-    ui->frame_3->setStyleSheet("QPushButton{ background: #191919; color: #dddddd; font-size:30px}");
+    ui->frame_3->setStyleSheet("QPushButton{ border: 1px solid black; background: #191919; color: #dddddd; font-size:30px}");
 }
 
 VideoMenuWidget::~VideoMenuWidget()
