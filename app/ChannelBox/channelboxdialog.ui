@@ -34,10 +34,10 @@
      <widget class="QDialogButtonBox" name="buttonBox">
       <property name="geometry">
        <rect>
-        <x>619</x>
-        <y>430</y>
+        <x>570</x>
+        <y>410</y>
         <width>161</width>
-        <height>23</height>
+        <height>31</height>
        </rect>
       </property>
       <property name="orientation">

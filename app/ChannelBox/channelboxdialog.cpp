@@ -8,6 +8,9 @@ ChannelBoxDialog::ChannelBoxDialog(QWidget *parent) :
     ui(new Ui::ChannelBoxDialog)
 {
     ui->setupUi(this);
+    setStyleSheet("QLabel{font-size: 24px ; color: #848484 }"
+                  "QPushButton, QRadioButton{font-size: 24px ; color: #dddddd; background: #191919}"
+                  "QDialog{background: #646464;}");
 }
 
 ChannelBoxDialog::~ChannelBoxDialog()

@@ -26,8 +26,6 @@ ChannelBoxWidget::ChannelBoxWidget(QWidget *parent) :
         setupUi((ChannelButtonRole)id);
     });
     setupUi(AnalogRole);
-
-    setStyleSheet("QRadioButton{ background: #191919; }");
 }
 
 ChannelBoxWidget::~ChannelBoxWidget()
@@ -83,7 +81,9 @@ void ChannelBoxWidget::setupUi(ChannelButtonRole role)
         bool isChecked = model->data(index, Qt::CheckStateRole).toBool();
         QLabel *label = new QLabel(text, this);
         if(isChecked){
-            label->setStyleSheet(QString("QLabel{ background: red }"));
+            label->setStyleSheet("font-size: 60px; color: #dddddd; background: #0f62de");
+        }else{
+            label->setStyleSheet("font-size: 60px; color: #dddddd; background: #191919");
         }
         label->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
         label->setMinimumSize(80,80);
