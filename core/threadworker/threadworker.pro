@@ -10,7 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = threadworker
 TEMPLATE = app
-DEFINES += USE_QPOINTER
+#DEFINES += USE_QPOINTER
 
 SOURCES += main.cpp\
         mainwindow.cpp \

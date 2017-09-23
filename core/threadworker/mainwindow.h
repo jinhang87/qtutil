@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QPointer>
+#include <QSharedPointer>
+#include <QProgressDialog>
 
 namespace Ui {
 class MainWindow;
@@ -31,6 +33,9 @@ public slots:
 
 signals:
     void operate(const QString &parameter);
+
+private:
+    QSharedPointer<QProgressDialog> m_dialogWait;
 };
 
 #endif // MAINWINDOW_H

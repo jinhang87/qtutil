@@ -3,6 +3,7 @@
 #include <QThread>
 #include "worker.h"
 #include <QDebug>
+#include <QSharedPointer>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -10,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 #ifdef USE_QPOINTER
-    worker = new Worker(this);
+    //worker = new Worker(this);
 #else
     worker = new Worker;
 #endif
@@ -24,11 +25,25 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(thread, &QThread::finished, worker, &QObject::deleteLater);
     //线程控制信号绑定
     connect(this, &MainWindow::operate, worker, &Worker::dowork);
+
+
+    m_dialogWait.reset();
+
     //线程结果上报信号绑定
-    connect(worker, &Worker::resultReady, this, &MainWindow::handleResult);
+    connect(worker, &Worker::resultReady, this, [=](const QString &parameter){
+        this->handleResult(parameter);
+        m_dialogWait.reset();
+    });
     //界面按钮信号绑定
     connect(ui->pushButton, &QPushButton::clicked, this, [=](){
         emit this->operate(QStringLiteral("send signal from mainwindow"));
+        m_dialogWait.reset(new QProgressDialog);
+        m_dialogWait->setModal(true);
+        m_dialogWait->setWindowTitle("Wait...");
+        m_dialogWait->setRange(0, 0);
+        m_dialogWait->setLabelText(QStringLiteral("Wait..."));
+        m_dialogWait->show();
+        m_dialogWait->exec();
     });
     //启动线程
     thread->start();
