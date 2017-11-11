@@ -34,6 +34,9 @@ public slots:
 signals:
     void operate(const QString &parameter);
 
+private slots:
+    void on_pushButtonInvoke_clicked();
+
 private:
     QSharedPointer<QProgressDialog> m_dialogWait;
 };

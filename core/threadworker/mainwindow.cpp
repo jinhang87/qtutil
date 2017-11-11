@@ -36,7 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
     });
     //界面按钮信号绑定
     connect(ui->pushButton, &QPushButton::clicked, this, [=](){
-        emit this->operate(QStringLiteral("send signal from mainwindow"));
+        emit this->operate(QStringLiteral("send signal from pushButton"));
         m_dialogWait.reset(new QProgressDialog);
         m_dialogWait->setModal(true);
         m_dialogWait->setWindowTitle("Wait...");
@@ -45,6 +45,11 @@ MainWindow::MainWindow(QWidget *parent) :
         m_dialogWait->show();
         m_dialogWait->exec();
     });
+    //测试invoke,可以避免定义信号operate
+    connect(ui->pushButtonInvoke, &QPushButton::clicked, this, [=](){
+        QMetaObject::invokeMethod(worker, "dowork", Q_ARG(const QString &, "send signal from pushButtonInvoke"));
+    });
+
     //启动线程
     thread->start();
     qDebug() << "MainWindow threadid : " << QThread::currentThreadId();
@@ -66,3 +71,7 @@ void MainWindow::handleResult(const QString& parameter)
 
 
 
+
+void MainWindow::on_pushButtonInvoke_clicked()
+{
+}
