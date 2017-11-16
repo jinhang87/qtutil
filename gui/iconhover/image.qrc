@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/image">
+        <file>主菜单-click.png</file>
+        <file>主菜单-normal.png</file>
+    </qresource>
+</RCC>
