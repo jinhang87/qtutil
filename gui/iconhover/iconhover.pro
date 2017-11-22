@@ -25,12 +25,24 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    menubutton.cpp
+    menubutton.cpp \
+    buttonimagedialog.cpp \
+    labelimagedialog.cpp \
+    widgetimagedialog.cpp \
+    lineeditdialog.cpp
 
 HEADERS  += mainwindow.h \
-    menubutton.h
+    menubutton.h \
+    buttonimagedialog.h \
+    labelimagedialog.h \
+    widgetimagedialog.h \
+    lineeditdialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    buttonimagedialog.ui \
+    labelimagedialog.ui \
+    widgetimagedialog.ui \
+    lineeditdialog.ui
 
 RESOURCES += \
     image.qrc
