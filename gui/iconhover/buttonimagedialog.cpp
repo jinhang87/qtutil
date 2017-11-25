@@ -24,8 +24,18 @@ ButtonImageDialog::ButtonImageDialog(QWidget *parent) :
     //From QPalette !
     ui->pushButtonFromQPalette->setAutoFillBackground(true);
     QPalette palette;
-    palette.setBrush(ui->pushButtonFromQPalette->backgroundRole(),QBrush(pixmapnormal));
+    palette.setBrush(QPalette::Button,QBrush(pixmapnormal));
     ui->pushButtonFromQPalette->setPalette(palette);
+
+/*
+    QPushButton{
+      border-image: url(:/image/主菜单-normal.png);
+    }
+    QPushButton:hover,QPushButton:checked{
+      border-image: url(:/image/主菜单-click.png);
+    }
+*/
+
 
 }
 

@@ -36,12 +36,8 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton{
-border-image: url(:/image/主菜单-normal.png);
-}
-QPushButton:hover,QPushButton:checked{
-border-image: url(:/image/主菜单-click.png);
-}</string>
+    <string notr="true">*{border-image: url(:/image/主菜单-normal.png);}
+*:hover,*:checked{border-image: url(:/image/主菜单-click.png);}</string>
    </property>
    <property name="text">
     <string>PushButtonFromQss</string>

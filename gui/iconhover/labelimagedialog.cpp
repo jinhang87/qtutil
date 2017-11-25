@@ -8,11 +8,15 @@ LabelImageDialog::LabelImageDialog(QWidget *parent) :
     ui->setupUi(this);
 
     QPixmap pixmapclick(":/image/click.png");
-    QPixmap fitpixmapclick = pixmapclick.scaled(ui->labelImage->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     QPixmap pixmapnormal(":/image/normal.png");
-    QPixmap fitpixmapnormal =pixmapnormal.scaled(ui->labelImage->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 
-    ui->labelImage->setPixmap(fitpixmapclick);
+    QPixmap fitpixmapclick = pixmapclick.scaled(ui->labelFromPixmap->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    QPixmap fitpixmapnormal =pixmapnormal.scaled(ui->labelFromPixmap->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    ui->labelFromPixmap->setPixmap(fitpixmapclick);
+
+
+    ui->labelFromPixmapContent->setPixmap(pixmapnormal);
+    ui->labelFromPixmapContent->setScaledContents(true);
 
 }
 
