@@ -1,5 +1,6 @@
 #include "buttonimagedialog.h"
 #include "ui_buttonimagedialog.h"
+#include <QBitmap>
 
 ButtonImageDialog::ButtonImageDialog(QWidget *parent) :
     QDialog(parent),
@@ -23,8 +24,10 @@ ButtonImageDialog::ButtonImageDialog(QWidget *parent) :
 
     //From QPalette !
     ui->pushButtonFromQPalette->setAutoFillBackground(true);
+    ui->pushButtonFromQPalette->setFlat(true);
     QPalette palette;
-    palette.setBrush(QPalette::Button,QBrush(pixmapnormal));
+    palette.setBrush(ui->pushButtonFromQPalette->backgroundRole(),QBrush(pixmapnormal));
+    ui->pushButtonFromQPalette->setMask(pixmapnormal.mask());
     ui->pushButtonFromQPalette->setPalette(palette);
 
 /*

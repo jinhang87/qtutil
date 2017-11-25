@@ -13,52 +13,54 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QPushButton" name="pushButtonFromIcon">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>40</y>
-     <width>221</width>
-     <height>221</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>PushButtonFromIcon</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButtonFromQss">
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>330</y>
-     <width>271</width>
-     <height>181</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">*{border-image: url(:/image/主菜单-normal.png);}
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QPushButton" name="pushButtonFromIcon">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>PushButtonFromIcon</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QPushButton" name="pushButtonFromQPalette">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>PushButtonFromQPalette</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="2">
+    <widget class="QPushButton" name="pushButtonFromQss">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">*{border-image: url(:/image/主菜单-normal.png);}
 *:hover,*:checked{border-image: url(:/image/主菜单-click.png);}</string>
-   </property>
-   <property name="text">
-    <string>PushButtonFromQss</string>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButtonFromQPalette">
-   <property name="geometry">
-    <rect>
-     <x>420</x>
-     <y>70</y>
-     <width>271</width>
-     <height>211</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>PushButtonFromQPalette</string>
-   </property>
-  </widget>
+     </property>
+     <property name="text">
+      <string>PushButtonFromQss</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>
