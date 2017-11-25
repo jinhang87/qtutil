@@ -6,6 +6,7 @@
 #include "widgetimagedialog.h"
 #include "lineeditdialog.h"
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -59,4 +60,9 @@ void MainWindow::on_pushButtonLineEdit_clicked()
     d.show();
     d.exec();
     this->show();
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+
 }

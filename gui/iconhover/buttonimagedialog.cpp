@@ -7,17 +7,25 @@ ButtonImageDialog::ButtonImageDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     QPixmap pixmapclick(":/image/click.png");
-    QPixmap fitpixmapclick = pixmapclick.scaled(ui->pushButton->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    //QPixmap fitpixmapclick = pixmapclick.scaled(ui->pushButton->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     QPixmap pixmapnormal(":/image/normal.png");
-    QPixmap fitpixmapnormal = pixmapnormal.scaled(ui->pushButton->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    //QPixmap fitpixmapnormal = pixmapnormal.scaled(ui->pushButton->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 
+
+    //From Icon ! Can not stretch
     QIcon icon;
-    icon.addPixmap(fitpixmapnormal, QIcon::Normal);
-    icon.addPixmap(fitpixmapclick, QIcon::Selected);
-    ui->pushButton->setIcon(icon);
-    ui->pushButton->setIconSize(ui->pushButton->size());
-    ui->pushButton->setFlat(true);
+    icon.addPixmap(pixmapnormal, QIcon::Normal);
+    //icon.addPixmap(pixmapclick, QIcon::Active);
+    ui->pushButtonFromIcon->setCheckable(true);
+    ui->pushButtonFromIcon->setIcon(icon);
+    ui->pushButtonFromIcon->setIconSize(ui->pushButtonFromIcon->size());
+    ui->pushButtonFromIcon->setFlat(true);
 
+    //From QPalette !
+    ui->pushButtonFromQPalette->setAutoFillBackground(true);
+    QPalette palette;
+    palette.setBrush(ui->pushButtonFromQPalette->backgroundRole(),QBrush(pixmapnormal));
+    ui->pushButtonFromQPalette->setPalette(palette);
 
 }
 
