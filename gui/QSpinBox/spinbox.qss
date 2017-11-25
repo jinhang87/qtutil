@@ -1,0 +1,40 @@
+﻿QDialog,QWidget{
+
+}
+
+QSpinBox{
+    color: #dddddd;
+    font-size: 32px;
+    border-image: url(:/normal.png);
+}
+
+QSpinBox::up-arrow:disabled, QSpinBox::up-arrow:off{
+    border-image: url(:/normal.png);
+}
+QSpinBox::down-arrow:disabled, QSpinBox::down-arrow:off{
+    border-image: url(:/normal.png);
+}
+
+QSpinBox::up-button{
+    subcontrol-origin: content;
+    subcontrol-position: right;
+    min-width:50px;
+    width:60px;
+    height:60px
+}
+
+QSpinBox::down-button{
+    subcontrol-origin: content;
+    subcontrol-position: left;
+    width:60px;
+    height:60px
+}
+
+QSpinBox::up-button:hover{
+    border-image: url(:/click-right.png) 1;
+}
+
+QSpinBox::down-button:hover{
+    border-image: url(:/click-left.png) 1;
+}
+*/

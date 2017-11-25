@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>spinbox.qss</file>
+        <file>click-left.png</file>
+        <file>click-right.png</file>
+        <file>disable-left.png</file>
+        <file>disable-right.png</file>
+        <file>normal.png</file>
+    </qresource>
+</RCC>
