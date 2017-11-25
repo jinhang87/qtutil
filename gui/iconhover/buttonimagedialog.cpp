@@ -1,22 +1,22 @@
-#include "buttonimagedialog.h"
+﻿#include "buttonimagedialog.h"
 #include "ui_buttonimagedialog.h"
 #include <QBitmap>
+#include <QDebug>
 
 ButtonImageDialog::ButtonImageDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ButtonImageDialog)
 {
     ui->setupUi(this);
-    QPixmap pixmapclick(":/image/click.png");
-    //QPixmap fitpixmapclick = pixmapclick.scaled(ui->pushButton->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-    QPixmap pixmapnormal(":/image/normal.png");
-    //QPixmap fitpixmapnormal = pixmapnormal.scaled(ui->pushButton->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-
+    QPixmap pixmapclick(QString(":/image/click.png"));
+    QPixmap pixmapnormal(QString(":/image/normal.png"));
 
     //From Icon ! Can not stretch
+    QPixmap fitpixmapclick = pixmapclick.scaled(ui->pushButtonFromIcon->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    QPixmap fitpixmapnormal = pixmapnormal.scaled(ui->pushButtonFromIcon->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     QIcon icon;
-    icon.addPixmap(pixmapnormal, QIcon::Normal);
-    //icon.addPixmap(pixmapclick, QIcon::Active);
+    icon.addPixmap(fitpixmapnormal, QIcon::Normal);
+    icon.addPixmap(fitpixmapclick, QIcon::Active);
     ui->pushButtonFromIcon->setCheckable(true);
     ui->pushButtonFromIcon->setIcon(icon);
     ui->pushButtonFromIcon->setIconSize(ui->pushButtonFromIcon->size());
