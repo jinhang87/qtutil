@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->spinBox->setRange(0,10);
 }
 
 MainWindow::~MainWindow()

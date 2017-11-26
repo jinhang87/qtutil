@@ -6,5 +6,7 @@
         <file>disable-left.png</file>
         <file>disable-right.png</file>
         <file>normal.png</file>
+        <file>down_arrow_disabled.png</file>
+        <file>up_arrow_disabled.png</file>
     </qresource>
 </RCC>

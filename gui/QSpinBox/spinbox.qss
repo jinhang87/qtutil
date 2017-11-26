@@ -1,40 +1,56 @@
 ﻿QDialog,QWidget{
 
 }
-
 QSpinBox{
     color: #dddddd;
     font-size: 32px;
-    border-image: url(:/normal.png);
+}
+QSpinBox::up-arrow,QSpinBox::down-arrow{
+    subcontrol-origin: content;
+    subcontrol-position: center center;
+    margin: 10px 10px 10px 10px;
+    background-color: blue;
+    width: 7px;
+    height: 7px;
+}
+*::up-arrow:disabled,
+*::up-arrow:off{
+    width: 10px;
+    height: 10px;
+    image: url(:/up_arrow_disabled.png);
+}
+*::down-arrow:disabled,
+*::down-arrow:off{
+    width: 10px;
+    height: 10px;
+    image: url(:/down_arrow_disabled.png);
 }
 
-QSpinBox::up-arrow:disabled, QSpinBox::up-arrow:off{
-    border-image: url(:/normal.png);
+QSpinBox::up-button:disabled,
+QSpinBox::up-button:off
+{
+    border-image: url(:/disable-right.png);
 }
-QSpinBox::down-arrow:disabled, QSpinBox::down-arrow:off{
-    border-image: url(:/normal.png);
+QSpinBox::down-button:disabled,
+QSpinBox::down-button:off{
+    border-image: url(:/disable-left.png);
 }
-
+QSpinBox::up-button, QSpinBox::down-button{
+    subcontrol-origin: margin;
+    border-image: url(:/normal.png);
+    margin: -30px 0;
+    min-width: 40px;
+}
 QSpinBox::up-button{
-    subcontrol-origin: content;
-    subcontrol-position: right;
-    min-width:50px;
-    width:60px;
-    height:60px
+    subcontrol-position: right center;
 }
-
 QSpinBox::down-button{
-    subcontrol-origin: content;
-    subcontrol-position: left;
-    width:60px;
-    height:60px
+    subcontrol-position: left center;
 }
-
 QSpinBox::up-button:hover{
-    border-image: url(:/click-right.png) 1;
+    border-image: url(:/click-right.png);
+}
+QSpinBox::down-button:hover{
+    border-image: url(:/click-left.png);
 }
 
-QSpinBox::down-button:hover{
-    border-image: url(:/click-left.png) 1;
-}
-*/
