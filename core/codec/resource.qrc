@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>-click-.png</file>
+        <file>剪切-click-.png</file>
+    </qresource>
+</RCC>
