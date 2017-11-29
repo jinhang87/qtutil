@@ -43,17 +43,22 @@ QToolTip {
 /* Customize radio buttons. */
 
 QRadioButton {
-    spacing: 5px;
+    spacing: 4px;
     background-color: blue;
+}
+
+QRadioButton:hover, QRadioButton:checked {
+    background-color: red;
 }
 
 QRadioButton::indicator {
     width: 13px;
     height: 13px;
+    margin: -60,-60
 }
-
+/*
 QRadioButton::indicator::unchecked {
-    image: url(:/images/radiobutton_unchecked.png);
+    background-color: yellow;
 }
 
 QRadioButton::indicator:unchecked:hover {
@@ -65,7 +70,7 @@ QRadioButton::indicator:unchecked:pressed {
 }
 
 QRadioButton::indicator::checked {
-    image: url(:/images/radiobutton_checked.png);
+    background-color: green;
 }
 
 QRadioButton::indicator:checked:hover {
@@ -75,6 +80,7 @@ QRadioButton::indicator:checked:hover {
 QRadioButton::indicator:checked:pressed {
     image: url(:/images/radiobutton_checked_pressed.png);
 }
+*/
 
 /* Customize arrows. */
 
